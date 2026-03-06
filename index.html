@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RISE TUITION HUB</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+background:#f4f6fb;
+color:#333;
+}
+
+/* HEADER WITH LOGO */
+header{
+background:#0b3d91;
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:10px 8%;
+}
+header h1{
+font-size:28px;
+margin-left:10px;
+}
+header .logo{
+display:flex;
+align-items:center;
+}
+header .logo img{
+height:60px;
+width:auto;
+border-radius:5px;
+}
+
+/* NAVIGATION */
+nav a{
+color:white;
+margin-left:20px;
+text-decoration:none;
+font-weight:bold;
+}
+nav a:hover{
+color:#ffd32a;
+}
+
+/* HERO */
+.hero{
+height:520px;
+background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+url("https://images.unsplash.com/photo-1523240795612-9a054b0db644");
+background-size:cover;
+background-position:center;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+padding:20px;
+}
+.hero h2{
+font-size:55px;
+animation:fade 2s;
+}
+.hero p{
+font-size:22px;
+margin-top:10px;
+}
+.btn{
+margin-top:25px;
+padding:14px 35px;
+background:#ffd32a;
+border-radius:6px;
+text-decoration:none;
+color:black;
+font-weight:bold;
+}
+.btn:hover{
+background:white;
+}
+
+/* SECTIONS */
+.section{
+padding:70px 10%;
+text-align:center;
+}
+.section h2{
+font-size:36px;
+color:#0b3d91;
+margin-bottom:30px;
+}
+
+/* COURSES */
+.courses{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+}
+.course{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+.course h3{
+color:#0b3d91;
+margin-bottom:10px;
+}
+
+/* FEATURES */
+.features{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+.feature{
+background:#0b3d91;
+color:white;
+padding:25px;
+border-radius:10px;
+}
+
+/* TESTIMONIALS */
+.testimonial{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 6px 15px rgba(0,0,0,0.1);
+margin-top:20px;
+}
+
+/* CONTACT */
+.contact-box{
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 6px 15px rgba(0,0,0,0.1);
+max-width:700px;
+margin:auto;
+}
+
+/* WHATSAPP */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:16px;
+border-radius:50%;
+font-size:24px;
+text-decoration:none;
+}
+
+/* FOOTER */
+footer{
+background:#0b3d91;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:60px;
+}
+
+@keyframes fade{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">
+<img src="/mnt/data/a_logo_for_rise_tuition_hub_is_displayed_on_a_wh.png" alt="RISE TUITION HUB Logo">
+<h1>RISE TUITION HUB</h1>
+</div>
+<nav>
+<a href="#">Home</a>
+<a href="#courses">Courses</a>
+<a href="#features">Why Us</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<section class="hero">
+<h2>RISE TUITION HUB</h2>
+<p>Quality Coaching For Class 6 – 12</p>
+</section>
+
+<section class="section" id="courses">
+<h2>Courses Offered</h2>
+<div class="courses">
+<div class="course">
+<h3>Class 6 – 8</h3>
+<p>All subjects foundation program for strong concept building.</p>
+</div>
+<div class="course">
+<h3>Class 9 – 10</h3>
+<p>Complete preparation for board exams with weekly tests.</p>
+</div>
+<div class="course">
+<h3>Class 11 – 12</h3>
+<p>Advanced Mathematics coaching for boards and competitive exams.</p>
+</div>
+</div>
+</section>
+
+<section class="section" id="features">
+<h2>Why Choose Us</h2>
+<div class="features">
+<div class="feature">Small Batch Size</div>
+<div class="feature">Concept Based Learning</div>
+<div class="feature">Weekly Tests</div>
+<div class="feature">Personal Attention</div>
+</div>
+</section>
+
+<section class="section">
+<h2>Student Reviews</h2>
+<div class="testimonial">
+<p>"Best tuition in Kabri village. Concepts are explained very clearly."</p>
+<b>- Student</b>
+</div>
+<div class="testimonial">
+<p>"Very helpful for board exam preparation. Highly recommended!"</p>
+<b>- Parent</b>
+</div>
+</section>
+
+<section class="section" id="contact">
+<h2>Contact Information</h2>
+<div class="contact-box">
+<p><b>Address:</b><br>
+Village Kabri Near Government School<br>
+Panipat, Haryana 132103
+</p>
+<p><b>Mobile:</b> +91 8222814300</p>
+<p><b>Email:</b> ritbhardwaj0416@gmail.com</p>
+</div>
+</section>
+
+<a class="whatsapp" href="https://wa.me/918222814300">💬</a>
+
+<footer>
+<p>© 2026 RISE TUITION HUB</p>
+</footer>
+
+</body>
+</html>
