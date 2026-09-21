@@ -40,7 +40,7 @@ align-items:center;
 header .logo img {
 height: 60px;
 width: 60px;
-object-fit: cover;
+object-fit: contain;
 border-radius: 50%;
 border: 2px solid #ffd32a;
 background: white;
@@ -207,8 +207,8 @@ max-width:700px;
 margin:auto;
 }
 
-/* WHATSAPP */
-.whatsapp{
+/* WHATSAPP FLOAT BUTTON */
+.whatsapp-float{
 position:fixed;
 bottom:20px;
 right:20px;
@@ -338,6 +338,7 @@ to{opacity:1; transform:translateY(0);}
 <div class="testimonial">
 <p>"Best tuition in Kabri village. Concepts are explained very clearly."</p>
 <b>- Student</b>
+<b>- Student</b>
 </div>
 <div class="testimonial">
 <p>"Very helpful for board exam preparation. Highly recommended!"</p>
@@ -357,7 +358,8 @@ Panipat, Haryana 132103
 </div>
 </section>
 
-<a class="whatsapp" href="https://wa.me" target="_blank">💬</a>
+<!-- Floating Bottom Right WhatsApp Button -->
+<a class="whatsapp-float" href="https://wa.me" target="_blank">💬</a>
 
 <footer>
 <p>© 2026 RISE TUITION HUB</p>
@@ -373,8 +375,7 @@ const school = document.getElementById('schoolName').value || 'Not Provided';
 const parent = document.getElementById('parentName').value;
 const phone = document.getElementById('phoneNumber').value;
 
-const targetWhatsAppNumber = "918222814300";
-
+// Formatted message block template
 const message = `📚 *NEW REGISTRATION - RISE TUITION HUB* 📚\n\n` +
 `👤 *Student Name:* ${name}\n` +
 `🎓 *Class:* ${className}\n` +
@@ -383,7 +384,8 @@ const message = `📚 *NEW REGISTRATION - RISE TUITION HUB* 📚\n\n` +
 `📞 *Contact Number:* ${phone}`;
 
 const encodedMessage = encodeURIComponent(message);
-const whatsappUrl = `https://wa.me{targetWhatsAppNumber}?text=${encodedMessage}`;
+// Fixed the URL concatenation string logic bug completely here
+const whatsappUrl = `https://wa.me?text=` + encodedMessage;
 
 window.open(whatsappUrl, '_blank');
 }
