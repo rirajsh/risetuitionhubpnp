@@ -3,391 +3,891 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RISE TUITION HUB</title>
+
+<title>RISE TUITION HUB | Quality Coaching for Class 6–12</title>
+
+<meta
+  name="description"
+  content="RISE TUITION HUB provides quality coaching for students from Class 6 to 12 in Kabri, Panipat, Haryana. Concept-based learning, personal attention, regular tests and academic guidance."
+>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family: 'Segoe UI', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
-body{
-background:#f4f6fb;
-color:#333;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
 }
 
-/* HEADER WITH LOGO */
-header{
-background:#0b3d91;
-color:white;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:10px 8%;
-}
-header h1{
-font-size:28px;
-margin-left:12px;
-font-weight: 700;
-letter-spacing: 0.5px;
-}
-header .logo{
-display:flex;
-align-items:center;
-}
-header .logo img {
-height: 60px;
-width: 60px;
-object-fit: contain;
-border-radius: 50%;
-border: 2px solid #ffd32a;
-background: white;
-padding: 2px;
+body {
+  background: #f4f6fb;
+  color: #333;
+  line-height: 1.6;
 }
 
-/* NAVIGATION */
-nav a{
-color:white;
-margin-left:20px;
-text-decoration:none;
-font-weight:bold;
+/* HEADER */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: #061f4d;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 5%;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
 }
-nav a:hover{
-color:#ffd32a;
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo img {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+  background: white;
+  border-radius: 12px;
+  padding: 4px;
+  border: 2px solid #e9bd4b;
+}
+
+.logo h1 {
+  color: #f6d77a;
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 17px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+nav a:hover {
+  color: #f6d77a;
+}
+
+/* HEADER BUTTONS */
+
+.header-btn {
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-weight: 800;
+  color: #061f4d !important;
+}
+
+.whatsapp-header {
+  background: #25d366;
+}
+
+.email-header {
+  background: #f6c94d;
 }
 
 /* HERO */
-.hero{
-height:520px;
-background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-url("https://unsplash.com");
-background-size:cover;
-background-position:center;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-color:white;
-padding:20px;
+
+.hero {
+  min-height: 550px;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      rgba(3, 23, 56, 0.65),
+      rgba(3, 23, 56, 0.82)
+    ),
+    url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2200&q=90");
+
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 70px 20px;
 }
-.hero h2{
-font-size:55px;
-animation:fade 2s;
+
+.hero-content {
+  max-width: 950px;
 }
-.hero p{
-font-size:22px;
-margin-top:10px;
+
+.hero-logo {
+  width: 220px;
+  max-width: 65%;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45));
 }
-.btn{
-margin-top:25px;
-padding:14px 35px;
-background:#ffd32a;
-border-radius:6px;
-text-decoration:none;
-color:black;
-font-weight:bold;
+
+.hero h2 {
+  font-size: clamp(35px, 6vw, 65px);
+  color: #f6d77a;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.55);
 }
-.btn:hover{
-background:white;
+
+.hero p {
+  font-size: clamp(18px, 3vw, 25px);
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.hero-description {
+  max-width: 780px;
+  margin: 22px auto 0;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 800;
+  transition: 0.3s ease;
+}
+
+.primary-btn {
+  background: #f6d04e;
+  color: #071f4d;
+}
+
+.secondary-btn {
+  background: #25d366;
+  color: white;
+}
+
+.email-btn {
+  background: white;
+  color: #071f4d;
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
 /* SECTIONS */
-.section{
-padding:70px 10%;
-text-align:center;
+
+.section {
+  padding: 70px 8%;
+  text-align: center;
 }
-.section h2{
-font-size:36px;
-color:#0b3d91;
-margin-bottom:30px;
+
+.section h2 {
+  color: #0b3d91;
+  font-size: clamp(28px, 4vw, 40px);
+  margin-bottom: 35px;
+  font-weight: 850;
 }
 
 /* COURSES */
-.courses{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
+
+.courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
 }
-.course{
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 8px 20px rgba(0,0,0,0.1);
+
+.course {
+  background: white;
+  padding: 30px 25px;
+  border-radius: 14px;
+  border-top: 5px solid #d5a936;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.09);
+  transition: 0.3s ease;
 }
-.course h3{
-color:#0b3d91;
-margin-bottom:10px;
+
+.course:hover {
+  transform: translateY(-6px);
+}
+
+.course h3 {
+  color: #0b3d91;
+  font-size: 23px;
+  margin-bottom: 12px;
 }
 
 /* FEATURES */
-.features{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-.feature{
-background:#0b3d91;
-color:white;
-padding:25px;
-border-radius:10px;
-font-weight: 600;
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
 }
 
-/* TESTIMONIALS */
-.testimonial{
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 6px 15px rgba(0,0,0,0.1);
-margin-top:20px;
+.feature {
+  background: linear-gradient(135deg, #092c68, #155ac7);
+  color: white;
+  padding: 30px 20px;
+  border-radius: 12px;
+  font-weight: 750;
+  font-size: 18px;
+  box-shadow: 0 8px 20px rgba(11, 61, 145, 0.2);
 }
 
-/* REGISTRATION FORM */
+/* REGISTRATION */
+
+.registration-section {
+  background: #edf2fa;
+}
+
 .form-box {
-background: white;
-padding: 40px;
-border-radius: 12px;
-box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-max-width: 600px;
-margin: auto;
-text-align: left;
+  max-width: 850px;
+  margin: auto;
+  background: white;
+  padding: 38px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  text-align: left;
 }
+
 .form-group {
-margin-bottom: 20px;
+  margin-bottom: 20px;
 }
+
 .form-group label {
-display: block;
-margin-bottom: 8px;
-font-weight: 600;
-color: #0b3d91;
+  display: block;
+  margin-bottom: 8px;
+  color: #0b3d91;
+  font-weight: 750;
 }
-.form-group input, .form-group select {
-width: 100%;
-padding: 12px;
-border: 2px solid #e1e5ee;
-border-radius: 6px;
-font-size: 16px;
-outline: none;
-transition: border-color 0.3s;
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 13px;
+  border: 2px solid #e1e5ee;
+  border-radius: 7px;
+  font-size: 16px;
+  outline: none;
+  background: white;
 }
-.form-group input:focus, .form-group select:focus {
-border-color: #0b3d91;
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #0b3d91;
 }
+
+.form-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 25px;
+}
+
 .submit-btn {
-width: 100%;
-padding: 14px;
-background: #25D366;
-color: white;
-border: none;
-border-radius: 6px;
-font-size: 18px;
-font-weight: bold;
-cursor: pointer;
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 10px;
-box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-transition: background 0.3s;
+  border: none;
+  border-radius: 8px;
+  padding: 15px;
+  color: white;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
+
 .submit-btn:hover {
-background: #20ba5a;
+  transform: translateY(-3px);
+}
+
+.whatsapp-submit {
+  background: #25d366;
+}
+
+.email-submit {
+  background: #0b3d91;
+}
+
+/* REVIEWS */
+
+.testimonial {
+  max-width: 800px;
+  margin: 20px auto 0;
+  background: white;
+  padding: 28px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.testimonial p {
+  font-style: italic;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.testimonial b {
+  color: #0b3d91;
 }
 
 /* CONTACT */
-.contact-box{
-background:white;
-padding:30px;
-border-radius:10px;
-box-shadow:0 6px 15px rgba(0,0,0,0.1);
-max-width:700px;
-margin:auto;
+
+.contact-box {
+  max-width: 750px;
+  margin: auto;
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09);
+  font-size: 17px;
 }
 
-/* WHATSAPP FLOAT BUTTON */
-.whatsapp-float{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25D366;
-color:white;
-padding:16px;
-border-radius:50%;
-font-size:24px;
-text-decoration:none;
-box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-z-index: 1000;
+.contact-box p {
+  margin-bottom: 14px;
+}
+
+.contact-box strong {
+  color: #0b3d91;
+}
+
+.contact-box a {
+  color: #0b3d91;
+  font-weight: 700;
+}
+
+/* FLOATING BUTTONS */
+
+.floating-buttons {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 1000;
+}
+
+.floating-button {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  font-size: 28px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.3);
+  transition: 0.3s ease;
+}
+
+.floating-button:hover {
+  transform: scale(1.1);
+}
+
+.whatsapp-float {
+  background: #25d366;
+}
+
+.email-float {
+  background: #e6b83f;
+  color: #071f4d;
 }
 
 /* FOOTER */
-footer{
-background:#0b3d91;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:60px;
+
+footer {
+  background: #061f4d;
+  color: white;
+  text-align: center;
+  padding: 23px 15px;
 }
 
-@keyframes fade{
-from{opacity:0; transform:translateY(20px);}
-to{opacity:1; transform:translateY(0);}
+/* MOBILE */
+
+@media (max-width: 850px) {
+  header {
+    flex-direction: column;
+    padding: 12px 4%;
+  }
+
+  .logo img {
+    width: 65px;
+    height: 65px;
+  }
+
+  .logo h1 {
+    font-size: 21px;
+  }
+
+  nav {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  nav a {
+    font-size: 13px;
+  }
+
+  .hero {
+    min-height: 520px;
+  }
+
+  .form-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo h1 {
+    font-size: 18px;
+  }
+
+  .logo img {
+    width: 58px;
+    height: 58px;
+  }
+
+  .hero-logo {
+    width: 160px;
+  }
+
+  .hero-description {
+    font-size: 15px;
+  }
+
+  .section {
+    padding: 55px 5%;
+  }
+
+  .form-box {
+    padding: 25px 20px;
+  }
+
+  .floating-buttons {
+    right: 15px;
+    bottom: 15px;
+  }
+
+  .floating-button {
+    width: 53px;
+    height: 53px;
+    font-size: 25px;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <header>
-<div class="logo">
-<img src="logo.png" alt="RISE TUITION HUB Logo">
-<h1>RISE TUITION HUB</h1>
-</div>
-<nav>
-<a href="#">Home</a>
-<a href="#courses">Courses</a>
-<a href="#registration">Register</a>
-<a href="#contact">Contact</a>
-</nav>
+  <div class="logo">
+    <img src="logo.png" alt="RISE TUITION HUB Logo">
+    <h1>RISE TUITION HUB</h1>
+  </div>
+
+  <nav aria-label="Main navigation">
+    <a href="#home">Home</a>
+    <a href="#courses">Courses</a>
+    <a href="#features">Why Us</a>
+    <a href="#registration">Register</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+
+    <a
+      class="header-btn whatsapp-header"
+      href="https://wa.me/918222814300"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      WhatsApp
+    </a>
+
+    <a
+      class="header-btn email-header"
+      href="mailto:rittu3308@gmail.com"
+    >
+      Email Us
+    </a>
+  </nav>
 </header>
 
-<section class="hero">
-<h2>RISE TUITION HUB</h2>
-<p>Quality Coaching For Class 6 – 12</p>
-<a href="#registration" class="btn">Admission Open - Register Now</a>
+<!-- HERO -->
+
+<section class="hero" id="home">
+  <div class="hero-content">
+
+    <img
+      class="hero-logo"
+      src="logo.png"
+      alt="RISE TUITION HUB"
+    >
+
+    <h2>RISE TUITION HUB</h2>
+
+    <p>Quality Coaching For Class 6 – 12</p>
+
+    <p class="hero-description">
+      RISE TUITION HUB provides quality coaching and concept-based learning
+      for students from Class 6 to 12. We help every learner build strong
+      fundamentals, improve confidence, strengthen academic performance,
+      and achieve educational goals through personal attention, experienced
+      guidance, regular practice, and continuous feedback.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#registration" class="btn primary-btn">
+        Admission Open – Register Now
+      </a>
+
+      <a
+        href="https://wa.me/918222814300"
+        class="btn secondary-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        WhatsApp Us
+      </a>
+
+      <a href="mailto:rittu3308@gmail.com" class="btn email-btn">
+        Email Us
+      </a>
+    </div>
+
+  </div>
 </section>
+
+<!-- COURSES -->
 
 <section class="section" id="courses">
-<h2>Courses Offered</h2>
-<div class="courses">
-<div class="course">
-<h3>Class 6 – 8</h3>
-<p>Foundation program for all subjects to build strong core concepts.</p>
-</div>
-<div class="course">
-<h3>Class 9 – 10</h3>
-<p>Complete preparation for board exams with weekly tests.</p>
-</div>
-<div class="course">
-<h3>Class 11 – 12</h3>
-<p>Advanced Mathematics coaching for boards and competitive exams.</p>
-</div>
-</div>
+  <h2>Courses Offered</h2>
+
+  <div class="courses">
+
+    <div class="course">
+      <h3>Class 6 – 8</h3>
+      <p>
+        Foundation coaching for all subjects to build strong core concepts,
+        confidence, and excellent learning habits.
+      </p>
+    </div>
+
+    <div class="course">
+      <h3>Class 9 – 10</h3>
+      <p>
+        Complete board examination preparation with concept-based teaching,
+        revision, practice, and weekly tests.
+      </p>
+    </div>
+
+    <div class="course">
+      <h3>Class 11 – 12</h3>
+      <p>
+        Advanced Mathematics coaching for board examinations and
+        competitive examination preparation.
+      </p>
+    </div>
+
+  </div>
 </section>
+
+<!-- FEATURES -->
 
 <section class="section" id="features">
-<h2>Why Choose Us</h2>
-<div class="features">
-<div class="feature">Small Batch Size</div>
-<div class="feature">Concept-Based Learning</div>
-<div class="feature">Weekly Tests</div>
-<div class="feature">Personal Attention</div>
-</div>
+  <h2>Why Choose Us</h2>
+
+  <div class="features">
+    <div class="feature">Small Batch Size</div>
+    <div class="feature">Concept-Based Learning</div>
+    <div class="feature">Weekly Tests</div>
+    <div class="feature">Personal Attention</div>
+  </div>
 </section>
 
-<!-- REGISTRATION SECTION -->
-<section class="section" id="registration" style="background: #eef2f9;">
-<h2>Student Registration</h2>
-<div class="form-box">
-<form id="regForm" onsubmit="sendToWhatsApp(event)">
-<div class="form-group">
-<label for="studentName">Student Name *</label>
-<input type="text" id="studentName" placeholder="Enter student's full name" required>
-</div>
+<!-- REGISTRATION -->
 
-<div class="form-group">
-<label for="className">Class / Grade *</label>
-<select id="className" required>
-<option value="" disabled selected>Select Class</option>
-<option value="Class 6">Class 6</option>
-<option value="Class 7">Class 7</option>
-<option value="Class 8">Class 8</option>
-<option value="Class 9">Class 9</option>
-<option value="Class 10">Class 10</option>
-<option value="Class 11">Class 11</option>
-<option value="Class 12">Class 12</option>
-</select>
-</div>
+<section class="section registration-section" id="registration">
+  <h2>Student Registration</h2>
 
-<div class="form-group">
-<label for="schoolName">School Name</label>
-<input type="text" id="schoolName" placeholder="Enter current school name">
-</div>
+  <div class="form-box">
 
-<div class="form-group">
-<label for="parentName">Parent / Guardian Name *</label>
-<input type="text" id="parentName" placeholder="Enter parent's name" required>
-</div>
+    <form id="regForm">
 
-<div class="form-group">
-<label for="phoneNumber">WhatsApp Mobile Number *</label>
-<input type="tel" id="phoneNumber" placeholder="Enter 10-digit mobile number" pattern="[0-9]{10}" required>
-</div>
+      <div class="form-group">
+        <label for="studentName">Student Name *</label>
+        <input
+          type="text"
+          id="studentName"
+          placeholder="Enter student's full name"
+          required
+        >
+      </div>
 
-<button type="submit" class="submit-btn">
-🟢 Submit via WhatsApp
-</button>
-</form>
-</div>
+      <div class="form-group">
+        <label for="className">Class / Grade *</label>
+
+        <select id="className" required>
+          <option value="" disabled selected>Select Class</option>
+          <option value="Class 6">Class 6</option>
+          <option value="Class 7">Class 7</option>
+          <option value="Class 8">Class 8</option>
+          <option value="Class 9">Class 9</option>
+          <option value="Class 10">Class 10</option>
+          <option value="Class 11">Class 11</option>
+          <option value="Class 12">Class 12</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="schoolName">School Name</label>
+        <input
+          type="text"
+          id="schoolName"
+          placeholder="Enter current school name"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="parentName">Parent / Guardian Name *</label>
+        <input
+          type="text"
+          id="parentName"
+          placeholder="Enter parent's name"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber">WhatsApp Mobile Number *</label>
+        <input
+          type="tel"
+          id="phoneNumber"
+          placeholder="Enter 10-digit mobile number"
+          pattern="[0-9]{10}"
+          maxlength="10"
+          required
+        >
+      </div>
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="submit-btn whatsapp-submit"
+          onclick="sendRegistrationToWhatsApp()"
+        >
+          🟢 Send to WhatsApp
+        </button>
+
+        <button
+          type="button"
+          class="submit-btn email-submit"
+          onclick="sendRegistrationToEmail()"
+        >
+          ✉️ Send by Email
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
 </section>
 
-<section class="section">
-<h2>Student Reviews</h2>
-<div class="testimonial">
-<p>"Best tuition in Kabri village. Concepts are explained very clearly."</p>
-<b>- Student</b>
-<b>- Student</b>
-</div>
-<div class="testimonial">
-<p>"Very helpful for board exam preparation. Highly recommended!"</p>
-<b>- Parent</b>
-</div>
+<!-- REVIEWS -->
+
+<section class="section" id="reviews">
+  <h2>Student Reviews</h2>
+
+  <div class="testimonial">
+    <p>
+      "Best tuition in Kabri village. Concepts are explained very clearly."
+    </p>
+    <b>— Student</b>
+  </div>
+
+  <div class="testimonial">
+    <p>
+      "Very helpful for board exam preparation. Highly recommended!"
+    </p>
+    <b>— Parent</b>
+  </div>
 </section>
+
+<!-- CONTACT -->
 
 <section class="section" id="contact">
-<h2>Contact Information</h2>
-<div class="contact-box">
-<p><b>Address:</b><br>
-Village Kabri Near Government School<br>
-Panipat, Haryana 132103
-</p>
-<p style="margin-top: 10px;"><b>Mobile:</b> +91 8222814300</p>
-<p style="margin-top: 5px;"><b>Email:</b> ritbhardwaj0416@gmail.com</p>
-</div>
+  <h2>Contact Information</h2>
+
+  <div class="contact-box">
+
+    <p>
+      <strong>Address:</strong><br>
+      Village Kabri Near Government School<br>
+      Panipat, Haryana 132103
+    </p>
+
+    <p>
+      <strong>Mobile:</strong>
+      <a href="tel:+918222814300">+91 8222814300</a>
+    </p>
+
+    <p>
+      <strong>WhatsApp:</strong>
+      <a
+        href="https://wa.me/918222814300"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Chat on WhatsApp
+      </a>
+    </p>
+
+    <p>
+      <strong>Email:</strong>
+      <a href="mailto:rittu3308@gmail.com">
+        rittu3308@gmail.com
+      </a>
+    </p>
+
+  </div>
 </section>
 
-<!-- Floating Bottom Right WhatsApp Button -->
-<a class="whatsapp-float" href="https://wa.me" target="_blank">💬</a>
+<!-- FLOATING CONTACT BUTTONS -->
+
+<div class="floating-buttons">
+
+  <a
+    class="floating-button whatsapp-float"
+    href="https://wa.me/918222814300"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat on WhatsApp"
+    title="Chat on WhatsApp"
+  >
+    💬
+  </a>
+
+  <a
+    class="floating-button email-float"
+    href="mailto:rittu3308@gmail.com"
+    aria-label="Send Email"
+    title="Send Email"
+  >
+    ✉
+  </a>
+
+</div>
+
+<!-- FOOTER -->
 
 <footer>
-<p>© 2026 RISE TUITION HUB</p>
+  <p>© 2026 RISE TUITION HUB. All Rights Reserved.</p>
 </footer>
 
+<!-- JAVASCRIPT -->
+
 <script>
-function sendToWhatsApp(event) {
-event.preventDefault();
+function getRegistrationDetails() {
+  const name = document.getElementById("studentName").value.trim();
+  const className = document.getElementById("className").value;
+  const school =
+    document.getElementById("schoolName").value.trim() || "Not Provided";
+  const parent = document.getElementById("parentName").value.trim();
+  const phone = document.getElementById("phoneNumber").value.trim();
 
-const name = document.getElementById('studentName').value;
-const className = document.getElementById('className').value;
-const school = document.getElementById('schoolName').value || 'Not Provided';
-const parent = document.getElementById('parentName').value;
-const phone = document.getElementById('phoneNumber').value;
+  if (!name || !className || !parent || !phone) {
+    alert("Please complete all required fields.");
+    return null;
+  }
 
-// Formatted message block template
-const message = `📚 *NEW REGISTRATION - RISE TUITION HUB* 📚\n\n` +
-`👤 *Student Name:* ${name}\n` +
-`🎓 *Class:* ${className}\n` +
-`🏫 *School:* ${school}\n` +
-`👪 *Parent Name:* ${parent}\n` +
-`📞 *Contact Number:* ${phone}`;
+  if (!/^[0-9]{10}$/.test(phone)) {
+    alert("Please enter a valid 10-digit mobile number.");
+    return null;
+  }
 
-const encodedMessage = encodeURIComponent(message);
-// Fixed the URL concatenation string logic bug completely here
-const whatsappUrl = `https://wa.me?text=` + encodedMessage;
+  return {
+    name,
+    className,
+    school,
+    parent,
+    phone
+  };
+}
 
-window.open(whatsappUrl, '_blank');
+function createRegistrationMessage(details) {
+  return (
+    "📚 NEW REGISTRATION - RISE TUITION HUB 📚\n\n" +
+    "👤 Student Name: " + details.name + "\n" +
+    "🎓 Class: " + details.className + "\n" +
+    "🏫 School: " + details.school + "\n" +
+    "👪 Parent / Guardian Name: " + details.parent + "\n" +
+    "📞 Student Contact Number: " + details.phone
+  );
+}
+
+function sendRegistrationToWhatsApp() {
+  const details = getRegistrationDetails();
+
+  if (!details) {
+    return;
+  }
+
+  const message = createRegistrationMessage(details);
+
+  const whatsappUrl =
+    "https://wa.me/918222814300?text=" +
+    encodeURIComponent(message);
+
+  window.open(whatsappUrl, "_blank");
+}
+
+function sendRegistrationToEmail() {
+  const details = getRegistrationDetails();
+
+  if (!details) {
+    return;
+  }
+
+  const subject = "New Student Registration - RISE TUITION HUB";
+  const body = createRegistrationMessage(details);
+
+  const emailUrl =
+    "mailto:rittu3308@gmail.com?subject=" +
+    encodeURIComponent(subject) +
+    "&body=" +
+    encodeURIComponent(body);
+
+  window.location.href = emailUrl;
 }
 </script>
 
