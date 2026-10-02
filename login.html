@@ -1,1 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Admin Login | Rise Tuition Hub</title>
+
+  <link rel="icon" type="image/png" href="logo.png.png">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(
+        135deg,
+        #082f6b,
+        #1769e0
+      );
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 430px;
+      background: white;
+      border-radius: 22px;
+      padding: 38px;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+    }
+
+    .logo-area {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .logo {
+      width: 78px;
+      height: 78px;
+      object-fit: contain;
+      border-radius: 15px;
+      margin-bottom: 12px;
+    }
+
+    .logo-area h1 {
+      color: #12284d;
+      font-size: 27px;
+      margin-bottom: 5px;
+    }
+
+    .logo-area p {
+      color: #718096;
+      font-size: 14px;
+    }
+
+    .admin-badge {
+      display: inline-block;
+      margin-top: 12px;
+      background: #eaf3ff;
+      color: #1769e0;
+      padding: 6px 13px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #26364f;
+    }
+
+    input {
+      width: 100%;
+      height: 50px;
+      border: 1px solid #d7dfeb;
+      border-radius: 10px;
+      padding: 0 14px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #1769e0;
+      box-shadow: 0 0 0 3px rgba(23,105,224,0.10);
+    }
+
+    .password-box {
+      position: relative;
+    }
+
+    .password-box input {
+      padding-right: 50px;
+    }
+
+    .show-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .forgot {
+      text-align: right;
+      margin-top: -5px;
+      margin-bottom: 20px;
+    }
+
+    .forgot button {
+      border: none;
+      background: none;
+      color: #1769e0;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .login-btn {
+      width: 100%;
+      height: 51px;
+      border: none;
+      border-radius: 10px;
+      background: #1769e0;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login-btn:hover {
+      background: #0d52b5;
+    }
+
+    .login-btn:disabled {
+      background: #8eb3e5;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      padding: 12px;
+      border-radius: 9px;
+      margin-bottom: 18px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .message.error {
+      display: block;
+      color: #b42318;
+      background: #fff0f0;
+      border: 1px solid #ffd0d0;
+    }
+
+    .message.success {
+      display: block;
+      color: #16733a;
+      background: #effcf3;
+      border: 1px solid #c7efd5;
+    }
+
+    .reset-box {
+      display: none;
+      margin-top: 22px;
+      padding-top: 20px;
+      border-top: 1px solid #e6ebf2;
+    }
+
+    .reset-box.active {
+      display: block;
+    }
+
+    .reset-box h3 {
+      color: #17345f;
+      margin-bottom: 7px;
+    }
+
+    .reset-box p {
+      color: #718096;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+
+    .reset-btn {
+      width: 100%;
+      height: 46px;
+      border: 1px solid #1769e0;
+      background: white;
+      color: #1769e0;
+      border-radius: 9px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .back-home {
+      text-align: center;
+      margin-top: 23px;
+    }
+
+    .back-home a {
+      color: #61718a;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .back-home a:hover {
+      color: #1769e0;
+    }
+
+    .security {
+      text-align: center;
+      margin-top: 22px;
+      color: #9aa8bb;
+      font-size: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 28px 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-card">
+
+    <div class="logo-area">
+
+      <img
+        src="logo.png.png"
+        alt="Rise Tuition Hub Logo"
+        class="logo"
+      >
+
+      <h1>Rise Tuition Hub</h1>
+
+      <p>Administration Portal</p>
+
+      <span class="admin-badge">
+        🔐 ADMIN LOGIN
+      </span>
+
+    </div>
+
+
+    <div id="message" class="message"></div>
+
+
+    <form id="loginForm">
+
+      <div class="form-group">
+
+        <label for="email">
+          Email Address
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          value="admin@gmail.com"
+          autocomplete="username"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="password">
+          Password
+        </label>
+
+        <div class="password-box">
+
+          <input
+            type="password"
+            id="password"
+            value="201112"
+            autocomplete="current-password"
+            required
+          >
+
+          <button
+            type="button"
+            class="show-password"
+            onclick="togglePassword()"
+            id="showBtn"
+          >
+            👁
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="forgot">
+
+        <button
+          type="button"
+          onclick="toggleReset()"
+        >
+          Forgot Password?
+        </button>
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="login-btn"
+        id="loginBtn"
+      >
+        Login to Admin Panel
+      </button>
+
+    </form>
+
+
+    <div
+      class="reset-box"
+      id="resetBox"
+    >
+
+      <h3>Reset Password</h3>
+
+      <p>
+        Enter your admin email address and a password reset
+        email will be sent.
+      </p>
+
+      <div class="form-group">
+
+        <label for="resetEmail">
+          Email Address
+        </label>
+
+        <input
+          type="email"
+          id="resetEmail"
+          value="admin@gmail.com"
+          placeholder="Enter admin email"
+        >
+
+      </div>
+
+      <button
+        class="reset-btn"
+        type="button"
+        id="resetBtn"
+        onclick="sendResetEmail()"
+      >
+        Send Reset Email
+      </button>
+
+    </div>
+
+
+    <div class="back-home">
+      <a href="index.html">
+        ← Back to Website
+      </a>
+    </div>
+
+
+    <div class="security">
+      Secure authentication powered by Supabase
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /* ===============================
+       SUPABASE
+       =============================== */
+
+    const SUPABASE_URL =
+      "https://iqqcoiflmpjwztwgualf.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_kak3WxVKdtsiDjo-bVvrXA_ITdmPDWr";
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    /* ===============================
+       ELEMENTS
+       =============================== */
+
+    const loginForm =
+      document.getElementById("loginForm");
+
+    const emailInput =
+      document.getElementById("email");
+
+    const passwordInput =
+      document.getElementById("password");
+
+    const loginBtn =
+      document.getElementById("loginBtn");
+
+    const message =
+      document.getElementById("message");
+
+
+    /* ===============================
+       MESSAGE
+       =============================== */
+
+    function showMessage(text, type) {
+
+      message.textContent = text;
+
+      message.className =
+        "message " + type;
+
+    }
+
+
+    function clearMessage() {
+
+      message.textContent = "";
+
+      message.className =
+        "message";
+
+    }
+
+
+    /* ===============================
+       EXISTING SESSION
+       =============================== */
+
+    async function checkSession() {
+
+      const {
+        data,
+        error
+      } = await supabaseClient.auth.getSession();
+
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      if (data.session) {
+
+        window.location.href =
+          "admin.html";
+
+      }
+
+    }
+
+    checkSession();
+
+
+    /* ===============================
+       LOGIN
+       =============================== */
+
+    loginForm.addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+        clearMessage();
+
+        const email =
+          emailInput.value.trim();
+
+        const password =
+          passwordInput.value;
+
+
+        loginBtn.disabled = true;
+
+        loginBtn.textContent =
+          "Logging in...";
+
+
+        try {
+
+          const {
+            data,
+            error
+          } =
+            await supabaseClient.auth.signInWithPassword({
+
+              email: email,
+
+              password: password
+
+            });
+
+
+          if (error) {
+
+            showMessage(
+              getErrorMessage(error.message),
+              "error"
+            );
+
+            loginBtn.disabled = false;
+
+            loginBtn.textContent =
+              "Login to Admin Panel";
+
+            return;
+
+          }
+
+
+          if (data.session) {
+
+            showMessage(
+              "Login successful. Opening admin panel...",
+              "success"
+            );
+
+            setTimeout(() => {
+
+              window.location.href =
+                "admin.html";
+
+            }, 700);
+
+          }
+
+        } catch (error) {
+
+          console.error(error);
+
+          showMessage(
+            "Something went wrong. Please try again.",
+            "error"
+          );
+
+          loginBtn.disabled = false;
+
+          loginBtn.textContent =
+            "Login to Admin Panel";
+
+        }
+
+      }
+    );
+
+
+    /* ===============================
+       LOGIN ERROR
+       =============================== */
+
+    function getErrorMessage(error) {
+
+      const text =
+        error.toLowerCase();
+
+      if (
+        text.includes(
+          "invalid login credentials"
+        )
+      ) {
+
+        return "Incorrect email or password.";
+
+      }
+
+      if (
+        text.includes(
+          "email not confirmed"
+        )
+      ) {
+
+        return "Please confirm the admin email address in Supabase.";
+
+      }
+
+      if (
+        text.includes(
+          "too many requests"
+        )
+      ) {
+
+        return "Too many attempts. Please wait and try again.";
+
+      }
+
+      return error;
+
+    }
+
+
+    /* ===============================
+       SHOW PASSWORD
+       =============================== */
+
+    function togglePassword() {
+
+      const showBtn =
+        document.getElementById("showBtn");
+
+
+      if (
+        passwordInput.type === "password"
+      ) {
+
+        passwordInput.type =
+          "text";
+
+        showBtn.textContent =
+          "🙈";
+
+      } else {
+
+        passwordInput.type =
+          "password";
+
+        showBtn.textContent =
+          "👁";
+
+      }
+
+    }
+
+
+    /* ===============================
+       RESET BOX
+       =============================== */
+
+    function toggleReset() {
+
+      document
+        .getElementById("resetBox")
+        .classList.toggle("active");
+
+    }
+
+
+    /* ===============================
+       RESET PASSWORD
+       =============================== */
+
+    async function sendResetEmail() {
+
+      clearMessage();
+
+      const resetEmail =
+        document
+          .getElementById("resetEmail")
+          .value
+          .trim();
+
+      const resetBtn =
+        document.getElementById("resetBtn");
+
+
+      if (!resetEmail) {
+
+        showMessage(
+          "Please enter your email address.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      resetBtn.disabled = true;
+
+      resetBtn.textContent =
+        "Sending...";
+
+
+      try {
+
+        const {
+          error
+        } =
+          await supabaseClient.auth.resetPasswordForEmail(
+            resetEmail,
+            {
+              redirectTo:
+                window.location.origin +
+                window.location.pathname
+            }
+          );
+
+
+        if (error) {
+
+          showMessage(
+            error.message,
+            "error"
+          );
+
+          resetBtn.disabled = false;
+
+          resetBtn.textContent =
+            "Send Reset Email";
+
+          return;
+
+        }
+
+
+        showMessage(
+          "Password reset email sent. Check your inbox.",
+          "success"
+        );
+
+        resetBtn.textContent =
+          "Email Sent";
+
+        resetBtn.disabled = false;
+
+      } catch (error) {
+
+        showMessage(
+          "Unable to send reset email.",
+          "error"
+        );
+
+        resetBtn.disabled = false;
+
+        resetBtn.textContent =
+          "Send Reset Email";
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
