@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Admin Panel - Rise Tuition Hub</title>
+<title>Rise Tuition Hub - Admin Panel</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 * {
@@ -28,26 +30,26 @@ body {
     height: 100vh;
     background: #0b3d91;
     color: white;
-    padding: 25px 15px;
+    padding: 22px 15px;
     overflow-y: auto;
 }
 
 .logo-area {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 28px;
 }
 
 .logo-area img {
     width: 75px;
     height: 75px;
     object-fit: contain;
-    border-radius: 15px;
     background: white;
+    border-radius: 15px;
 }
 
 .logo-area h2 {
     margin-top: 10px;
-    font-size: 20px;
+    font-size: 19px;
 }
 
 .menu button {
@@ -55,7 +57,7 @@ body {
     border: none;
     background: transparent;
     color: white;
-    padding: 14px;
+    padding: 13px;
     text-align: left;
     border-radius: 8px;
     cursor: pointer;
@@ -69,8 +71,8 @@ body {
 }
 
 .logout {
-    margin-top: 25px !important;
     background: #dc2626 !important;
+    margin-top: 20px;
 }
 
 /* MAIN */
@@ -80,9 +82,6 @@ body {
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 25px;
 }
 
@@ -90,8 +89,9 @@ body {
     font-size: 28px;
 }
 
-.date {
+.header p {
     color: #64748b;
+    margin-top: 5px;
 }
 
 /* SECTIONS */
@@ -103,12 +103,11 @@ body {
     display: block;
 }
 
-/* CARDS */
+/* DASHBOARD */
 .cards {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 18px;
-    margin-bottom: 30px;
 }
 
 .card {
@@ -119,12 +118,12 @@ body {
 }
 
 .card h3 {
-    font-size: 14px;
     color: #64748b;
+    font-size: 14px;
     margin-bottom: 10px;
 }
 
-.card .number {
+.number {
     font-size: 28px;
     font-weight: bold;
     color: #0b3d91;
@@ -147,7 +146,7 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 900px;
+    min-width: 1150px;
 }
 
 th,
@@ -161,45 +160,62 @@ td {
 th {
     background: #f1f5f9;
     color: #334155;
+    white-space: nowrap;
 }
 
-button.action {
+/* BUTTONS */
+.add-btn {
+    background: #0b3d91;
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 7px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.add-btn:hover {
+    background: #145dcc;
+}
+
+.action-btn {
     border: none;
     padding: 7px 10px;
-    border-radius: 6px;
+    border-radius: 5px;
     cursor: pointer;
     margin: 2px;
-    font-size: 12px;
-}
-
-.whatsapp {
-    background: #22c55e;
     color: white;
 }
 
-.email {
+.edit-btn {
     background: #2563eb;
-    color: white;
 }
 
-.enroll {
-    background: #7c3aed;
-    color: white;
-}
-
-.reply {
-    background: #f59e0b;
-    color: white;
-}
-
-.edit {
-    background: #2563eb;
-    color: white;
-}
-
-.delete {
+.delete-btn {
     background: #dc2626;
+}
+
+.save-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    background: #0b3d91;
     color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.cancel-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    background: #64748b;
+    color: white;
+    cursor: pointer;
+    margin-left: 5px;
 }
 
 /* FORM */
@@ -208,6 +224,7 @@ button.action {
     padding: 25px;
     border-radius: 14px;
     box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+    margin-bottom: 20px;
 }
 
 .form-grid {
@@ -222,53 +239,54 @@ button.action {
 }
 
 .form-group label {
-    margin-bottom: 7px;
     font-weight: bold;
+    margin-bottom: 7px;
 }
 
 .form-group input,
-.form-group select,
-.form-group textarea {
+.form-group select {
     padding: 11px;
     border: 1px solid #cbd5e1;
     border-radius: 7px;
     outline: none;
 }
 
-.form-group textarea {
-    min-height: 100px;
-    resize: vertical;
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #2563eb;
 }
 
-.save-btn {
-    margin-top: 20px;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 8px;
-    background: #0b3d91;
-    color: white;
-    cursor: pointer;
+.status {
+    padding: 6px 9px;
+    border-radius: 5px;
+    font-size: 12px;
     font-weight: bold;
 }
 
+.status-paid {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-pending {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.loading {
+    text-align: center;
+    padding: 25px;
+    color: #64748b;
+}
+
 /* MOBILE */
-@media(max-width: 900px) {
-
-    .sidebar {
-        width: 200px;
-    }
-
-    .main {
-        margin-left: 200px;
-    }
-
+@media(max-width: 1000px) {
     .cards {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media(max-width: 600px) {
-
+@media(max-width: 700px) {
     .sidebar {
         position: relative;
         width: 100%;
@@ -298,13 +316,17 @@ button.action {
 <div class="sidebar">
 
     <div class="logo-area">
-        <img src="logo.png.png" alt="Logo">
+
+        <img src="logo.png.png" alt="Rise Tuition Hub">
+
         <h2>Rise Tuition Hub</h2>
+
     </div>
 
     <div class="menu">
 
-        <button class="active" onclick="showSection('dashboard', this)">
+        <button class="active"
+                onclick="showSection('dashboard', this)">
             Dashboard
         </button>
 
@@ -346,10 +368,11 @@ button.action {
 <div class="main">
 
     <div class="header">
-        <div>
-            <h1 id="pageTitle">Dashboard</h1>
-            <p class="date" id="todayDate"></p>
-        </div>
+
+        <h1 id="pageTitle">Dashboard</h1>
+
+        <p id="todayDate"></p>
+
     </div>
 
 
@@ -376,24 +399,13 @@ button.action {
 
             <div class="card">
                 <h3>Paid Fees</h3>
-                <div class="number">₹0</div>
+                <div class="number" id="paidFees">₹0</div>
             </div>
 
             <div class="card">
                 <h3>Pending Fees</h3>
-                <div class="number">₹0</div>
+                <div class="number" id="pendingFees">₹0</div>
             </div>
-
-        </div>
-
-        <div class="table-box">
-
-            <h2>Welcome to Rise Tuition Hub Admin Panel</h2>
-
-            <p>
-                Use the menu on the left to manage admissions,
-                students, fees, attendance, performance and settings.
-            </p>
 
         </div>
 
@@ -408,36 +420,9 @@ button.action {
 
             <h2>Admissions</h2>
 
-            <table>
-
-                <thead>
-
-                    <tr>
-                        <th>Student Name</th>
-                        <th>Class</th>
-                        <th>School Name</th>
-                        <th>Student Phone</th>
-                        <th>Parent Phone</th>
-                        <th>Email</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Sent Via</th>
-                        <th>Actions</th>
-                    </tr>
-
-                </thead>
-
-                <tbody id="admissionsTable">
-
-                    <tr>
-                        <td colspan="10">
-                            No admissions yet.
-                        </td>
-                    </tr>
-
-                </tbody>
-
-            </table>
+            <p>
+                Admissions management will be connected next.
+            </p>
 
         </div>
 
@@ -452,9 +437,131 @@ button.action {
 
             <h2>Students</h2>
 
-            <button class="save-btn" onclick="addStudent()">
+            <button class="add-btn"
+                    onclick="openStudentForm()">
                 + Add Student
             </button>
+
+
+            <!-- STUDENT FORM -->
+
+            <div id="studentForm"
+                 class="form-box"
+                 style="display:none;">
+
+                <h2 id="formTitle">Add Student</h2>
+
+                <br>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Student Name</label>
+                        <input id="studentName" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Class</label>
+                        <input id="studentClass" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label>School</label>
+                        <input id="studentSchool" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Student Phone</label>
+                        <input id="studentPhone" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Parent Phone</label>
+                        <input id="parentPhone" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input id="studentEmail" type="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fee Amount</label>
+                        <input id="feeAmount"
+                               type="text"
+                               placeholder="Example: ₹2000">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fee Status</label>
+
+                        <select id="feeStatus">
+
+                            <option value="Paid">Paid</option>
+
+                            <option value="Pending">Pending</option>
+
+                            <option value="Partially Paid">
+                                Partially Paid
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Attendance</label>
+
+                        <input id="attendance"
+                               type="text"
+                               placeholder="Example: 95%">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Performance</label>
+
+                        <select id="performance">
+
+                            <option value="Excellent">
+                                Excellent
+                            </option>
+
+                            <option value="Very Good">
+                                Very Good
+                            </option>
+
+                            <option value="Good">
+                                Good
+                            </option>
+
+                            <option value="Average">
+                                Average
+                            </option>
+
+                            <option value="Needs Improvement">
+                                Needs Improvement
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <button class="save-btn"
+                        onclick="saveStudent()">
+                    Save Student
+                </button>
+
+                <button class="cancel-btn"
+                        onclick="closeStudentForm()">
+                    Cancel
+                </button>
+
+            </div>
+
+
+            <!-- STUDENT TABLE -->
 
             <table>
 
@@ -476,15 +583,7 @@ button.action {
 
                 </thead>
 
-                <tbody id="studentsTable">
-
-                    <tr>
-                        <td colspan="11">
-                            No students added yet.
-                        </td>
-                    </tr>
-
-                </tbody>
+                <tbody id="studentsTable"></tbody>
 
             </table>
 
@@ -501,31 +600,9 @@ button.action {
 
             <h2>Fees</h2>
 
-            <table>
-
-                <thead>
-
-                    <tr>
-                        <th>Student Name</th>
-                        <th>Fee Amount</th>
-                        <th>Paid</th>
-                        <th>Pending</th>
-                        <th>Month</th>
-                    </tr>
-
-                </thead>
-
-                <tbody id="feesTable">
-
-                    <tr>
-                        <td colspan="5">
-                            No fee records yet.
-                        </td>
-                    </tr>
-
-                </tbody>
-
-            </table>
+            <p>
+                Fees management will be connected next.
+            </p>
 
         </div>
 
@@ -540,30 +617,9 @@ button.action {
 
             <h2>Attendance</h2>
 
-            <table>
-
-                <thead>
-
-                    <tr>
-                        <th>Student Name</th>
-                        <th>Present</th>
-                        <th>Absent</th>
-                        <th>Attendance %</th>
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    <tr>
-                        <td colspan="4">
-                            No attendance records yet.
-                        </td>
-                    </tr>
-
-                </tbody>
-
-            </table>
+            <p>
+                Attendance management will be connected next.
+            </p>
 
         </div>
 
@@ -578,39 +634,8 @@ button.action {
 
             <h2>Performance</h2>
 
-            <table>
-
-                <thead>
-
-                    <tr>
-                        <th>Student Name</th>
-                        <th>Performance</th>
-                        <th>Remarks</th>
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    <tr>
-                        <td colspan="3">
-                            No performance records yet.
-                        </td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-            <br>
-
             <p>
-                Performance levels:
-                <b>Excellent</b> |
-                <b>Very Good</b> |
-                <b>Good</b> |
-                <b>Average</b> |
-                <b>Needs Improvement</b>
+                Performance management will be connected next.
             </p>
 
         </div>
@@ -634,53 +659,32 @@ button.action {
 
                     <label>WhatsApp Number</label>
 
-                    <input
-                        type="text"
-                        value="8228143000"
-                        id="whatsappNumber"
-                    >
+                    <input id="whatsappNumber"
+                           type="text"
+                           value="8228143000">
 
                 </div>
-
 
                 <div class="form-group">
 
                     <label>Email Address</label>
 
-                    <input
-                        type="email"
-                        value="rittu3308@gmail.com"
-                        id="emailAddress"
-                    >
+                    <input id="emailAddress"
+                           type="email"
+                           value="rittu3308@gmail.com">
 
                 </div>
-
 
                 <div class="form-group">
 
                     <label>Website Name</label>
 
-                    <input
-                        type="text"
-                        value="Rise Tuition Hub"
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Website Details</label>
-
-                    <textarea>Rise Tuition Hub provides quality tuition and academic support for students.</textarea>
+                    <input type="text"
+                           value="Rise Tuition Hub">
 
                 </div>
 
             </div>
-
-            <button class="save-btn" onclick="saveSettings()">
-                Save Settings
-            </button>
 
         </div>
 
@@ -691,12 +695,36 @@ button.action {
 
 <script>
 
-/* DATE */
+/* =====================================================
+   SUPABASE
+   ===================================================== */
 
-const date = new Date();
+const SUPABASE_URL =
+    "https://iqqcoiflmpjwztwgualf.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_kak3WxVKdtsiDjo-bVvrXA_ITdmPDWr";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+/* =====================================================
+   VARIABLES
+   ===================================================== */
+
+let editingStudentId = null;
+
+
+/* =====================================================
+   DATE
+   ===================================================== */
 
 document.getElementById("todayDate").innerText =
-    date.toLocaleDateString("en-IN", {
+    new Date().toLocaleDateString("en-IN", {
         weekday: "long",
         year: "numeric",
         month: "long",
@@ -704,33 +732,31 @@ document.getElementById("todayDate").innerText =
     });
 
 
-/* PAGE SWITCHING */
+/* =====================================================
+   NAVIGATION
+   ===================================================== */
 
 function showSection(sectionId, button) {
 
-    const sections =
-        document.querySelectorAll(".section");
+    document
+        .querySelectorAll(".section")
+        .forEach(section => {
+            section.classList.remove("active");
+        });
 
-    sections.forEach(section => {
-        section.classList.remove("active");
-    });
-
-    document.getElementById(sectionId)
+    document
+        .getElementById(sectionId)
         .classList.add("active");
 
-
-    const buttons =
-        document.querySelectorAll(".menu button");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("active");
-    });
+    document
+        .querySelectorAll(".menu button")
+        .forEach(btn => {
+            btn.classList.remove("active");
+        });
 
     button.classList.add("active");
 
-
     const titles = {
-
         dashboard: "Dashboard",
         admissions: "Admissions",
         students: "Students",
@@ -738,49 +764,525 @@ function showSection(sectionId, button) {
         attendance: "Attendance",
         performance: "Performance",
         settings: "Settings"
-
     };
 
     document.getElementById("pageTitle").innerText =
         titles[sectionId];
 
-}
-
-
-/* ADD STUDENT */
-
-function addStudent() {
-
-    alert(
-        "Student database connection will be added next."
-    );
+    if (sectionId === "students") {
+        loadStudents();
+    }
 
 }
 
 
-/* SAVE SETTINGS */
+/* =====================================================
+   OPEN FORM
+   ===================================================== */
 
-function saveSettings() {
+function openStudentForm() {
 
-    alert("Settings saved successfully.");
+    editingStudentId = null;
+
+    document.getElementById("formTitle").innerText =
+        "Add Student";
+
+    clearStudentForm();
+
+    document.getElementById("studentForm").style.display =
+        "block";
 
 }
 
 
-/* LOGOUT */
+/* =====================================================
+   CLOSE FORM
+   ===================================================== */
 
-function logout() {
+function closeStudentForm() {
 
-    const confirmLogout =
-        confirm("Are you sure you want to logout?");
+    document.getElementById("studentForm").style.display =
+        "none";
 
-    if (confirmLogout) {
+    editingStudentId = null;
 
-        window.location.href = "login.html";
+}
+
+
+/* =====================================================
+   CLEAR FORM
+   ===================================================== */
+
+function clearStudentForm() {
+
+    document.getElementById("studentName").value = "";
+    document.getElementById("studentClass").value = "";
+    document.getElementById("studentSchool").value = "";
+    document.getElementById("studentPhone").value = "";
+    document.getElementById("parentPhone").value = "";
+    document.getElementById("studentEmail").value = "";
+    document.getElementById("feeAmount").value = "";
+    document.getElementById("feeStatus").value = "Paid";
+    document.getElementById("attendance").value = "";
+    document.getElementById("performance").value = "Excellent";
+
+}
+
+
+/* =====================================================
+   SAVE STUDENT
+   ===================================================== */
+
+async function saveStudent() {
+
+    const student = {
+
+        student_name:
+            document.getElementById("studentName").value.trim(),
+
+        class:
+            document.getElementById("studentClass").value.trim(),
+
+        school:
+            document.getElementById("studentSchool").value.trim(),
+
+        student_phone:
+            document.getElementById("studentPhone").value.trim(),
+
+        parent_phone:
+            document.getElementById("parentPhone").value.trim(),
+
+        email:
+            document.getElementById("studentEmail").value.trim(),
+
+        fee_amount:
+            document.getElementById("feeAmount").value.trim(),
+
+        fee_status:
+            document.getElementById("feeStatus").value,
+
+        attendance:
+            document.getElementById("attendance").value.trim(),
+
+        performance:
+            document.getElementById("performance").value
+
+    };
+
+
+    if (!student.student_name) {
+
+        alert("Please enter the student's name.");
+
+        return;
+
+    }
+
+
+    const saveButton =
+        document.querySelector(".save-btn");
+
+    saveButton.disabled = true;
+    saveButton.innerText = "Saving...";
+
+
+    try {
+
+        let result;
+
+
+        if (editingStudentId !== null) {
+
+            result =
+                await supabaseClient
+                    .from("students")
+                    .update(student)
+                    .eq("id", editingStudentId);
+
+        } else {
+
+            result =
+                await supabaseClient
+                    .from("students")
+                    .insert([student]);
+
+        }
+
+
+        if (result.error) {
+
+            console.error(result.error);
+
+            alert(
+                "Could not save student:\n\n" +
+                result.error.message
+            );
+
+            return;
+
+        }
+
+
+        alert(
+            editingStudentId !== null
+                ? "Student updated successfully."
+                : "Student added successfully."
+        );
+
+
+        closeStudentForm();
+
+        await loadStudents();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Unexpected error:\n\n" +
+            error.message
+        );
+
+    }
+
+    finally {
+
+        saveButton.disabled = false;
+        saveButton.innerText = "Save Student";
 
     }
 
 }
+
+
+/* =====================================================
+   LOAD STUDENTS
+   ===================================================== */
+
+async function loadStudents() {
+
+    const table =
+        document.getElementById("studentsTable");
+
+
+    table.innerHTML = `
+        <tr>
+            <td colspan="11" class="loading">
+                Loading students...
+            </td>
+        </tr>
+    `;
+
+
+    const { data, error } =
+        await supabaseClient
+            .from("students")
+            .select("*")
+            .order("id", {
+                ascending: false
+            });
+
+
+    if (error) {
+
+        console.error("Supabase error:", error);
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="11">
+                    Could not load students.
+                </td>
+            </tr>
+        `;
+
+        alert(
+            "Could not load students:\n\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById("totalStudents").innerText =
+        data.length;
+
+
+    if (!data || data.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="11">
+                    No students added yet.
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    table.innerHTML = "";
+
+
+    data.forEach(student => {
+
+        const row =
+            document.createElement("tr");
+
+
+        let feeClass = "";
+
+
+        if (student.fee_status === "Paid") {
+
+            feeClass = "status status-paid";
+
+        }
+
+        else if (student.fee_status === "Pending") {
+
+            feeClass = "status status-pending";
+
+        }
+
+
+        row.innerHTML = `
+
+            <td>
+                ${escapeHTML(student.student_name)}
+            </td>
+
+            <td>
+                ${escapeHTML(student.class)}
+            </td>
+
+            <td>
+                ${escapeHTML(student.school)}
+            </td>
+
+            <td>
+                ${escapeHTML(student.student_phone)}
+            </td>
+
+            <td>
+                ${escapeHTML(student.parent_phone)}
+            </td>
+
+            <td>
+                ${escapeHTML(student.email)}
+            </td>
+
+            <td>
+                ${escapeHTML(student.fee_amount)}
+            </td>
+
+            <td>
+                <span class="${feeClass}">
+                    ${escapeHTML(student.fee_status)}
+                </span>
+            </td>
+
+            <td>
+                ${escapeHTML(student.attendance)}
+            </td>
+
+            <td>
+                ${escapeHTML(student.performance)}
+            </td>
+
+            <td>
+
+                <button
+                    class="action-btn edit-btn"
+                    onclick="editStudent(${student.id})">
+                    Edit
+                </button>
+
+                <button
+                    class="action-btn delete-btn"
+                    onclick="deleteStudent(${student.id})">
+                    Delete
+                </button>
+
+            </td>
+
+        `;
+
+
+        table.appendChild(row);
+
+    });
+
+}
+
+
+/* =====================================================
+   EDIT STUDENT
+   ===================================================== */
+
+async function editStudent(id) {
+
+    const { data, error } =
+        await supabaseClient
+            .from("students")
+            .select("*")
+            .eq("id", id)
+            .single();
+
+
+    if (error) {
+
+        alert(
+            "Could not load student:\n\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    editingStudentId = id;
+
+
+    document.getElementById("formTitle").innerText =
+        "Edit Student";
+
+
+    document.getElementById("studentName").value =
+        data.student_name || "";
+
+    document.getElementById("studentClass").value =
+        data.class || "";
+
+    document.getElementById("studentSchool").value =
+        data.school || "";
+
+    document.getElementById("studentPhone").value =
+        data.student_phone || "";
+
+    document.getElementById("parentPhone").value =
+        data.parent_phone || "";
+
+    document.getElementById("studentEmail").value =
+        data.email || "";
+
+    document.getElementById("feeAmount").value =
+        data.fee_amount || "";
+
+    document.getElementById("feeStatus").value =
+        data.fee_status || "Paid";
+
+    document.getElementById("attendance").value =
+        data.attendance || "";
+
+    document.getElementById("performance").value =
+        data.performance || "Excellent";
+
+
+    document.getElementById("studentForm").style.display =
+        "block";
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* =====================================================
+   DELETE STUDENT
+   ===================================================== */
+
+async function deleteStudent(id) {
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to delete this student?"
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    const { error } =
+        await supabaseClient
+            .from("students")
+            .delete()
+            .eq("id", id);
+
+
+    if (error) {
+
+        alert(
+            "Could not delete student:\n\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    alert(
+        "Student deleted successfully."
+    );
+
+
+    await loadStudents();
+
+}
+
+
+/* =====================================================
+   HTML SAFETY
+   ===================================================== */
+
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "";
+    }
+
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =====================================================
+   LOGOUT
+   ===================================================== */
+
+function logout() {
+
+    window.location.href = "login.html";
+
+}
+
+
+/* =====================================================
+   INITIAL LOAD
+   ===================================================== */
+
+loadStudents();
 
 </script>
 
