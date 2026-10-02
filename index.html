@@ -1,37 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>
-    Rise Tuition Hub | Quality Tuition & Academic Support
-  </title>
-
-  <meta
-    name="description"
-    content="Rise Tuition Hub provides quality tuition, academic guidance, regular performance tracking and personal attention for students."
-  >
-
-  <link
-    rel="icon"
-    type="image/png"
-    href="logo.png.png"
-  >
-
+  <title>Rise Tuition Hub | Learn Today, Lead Tomorrow</title>
+  <meta name="description" content="Rise Tuition Hub - Professional tuition and academic support for students from Class 6th to 12th.">
 
   <style>
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
     }
 
     html {
@@ -39,135 +19,145 @@
     }
 
     body {
+      font-family: Arial, Helvetica, sans-serif;
       background: #f5f9ff;
       color: #172033;
       line-height: 1.6;
     }
 
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-    /* ================= NAVBAR ================= */
+    button,
+    input,
+    select {
+      font-family: inherit;
+    }
 
-    header {
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    .navbar {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(255,255,255,0.97);
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid #e5eaf2;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 20px rgba(25, 65, 120, 0.06);
     }
 
-    .navbar {
+    .nav-container {
       max-width: 1200px;
-      height: 76px;
       margin: auto;
+      min-height: 72px;
       padding: 0 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 20px;
     }
 
-    .brand {
+    .logo-area {
       display: flex;
       align-items: center;
       gap: 12px;
-      text-decoration: none;
-      color: #123c8c;
     }
 
-    .brand img {
+    .logo {
       width: 48px;
       height: 48px;
       object-fit: contain;
-      border-radius: 10px;
+      border-radius: 12px;
     }
 
-    .brand-text {
+    .brand {
       font-size: 21px;
       font-weight: 800;
+      color: #0757c9;
+      letter-spacing: -0.4px;
     }
 
-    nav {
+    .nav-links {
       display: flex;
       align-items: center;
       gap: 28px;
     }
 
-    nav a {
-      text-decoration: none;
-      color: #26364f;
-      font-weight: 600;
+    .nav-links a {
       font-size: 15px;
+      font-weight: 600;
+      color: #3d485a;
+      transition: 0.25s;
     }
 
-    nav a:hover {
-      color: #1769e0;
-    }
-
-    .admin-btn {
-      background: #1769e0;
-      color: white !important;
-      padding: 10px 17px;
-      border-radius: 9px;
+    .nav-links a:hover {
+      color: #0757c9;
     }
 
     .menu-btn {
       display: none;
       border: none;
-      background: none;
+      background: transparent;
       font-size: 28px;
       cursor: pointer;
-      color: #173c79;
+      color: #0757c9;
     }
 
-
-    /* ================= HERO ================= */
+    /* =========================
+       HERO
+    ========================= */
 
     .hero {
-      min-height: 620px;
-      display: flex;
-      align-items: center;
+      position: relative;
+      overflow: hidden;
       background:
-        linear-gradient(
-          110deg,
-          rgba(7,39,93,0.96),
-          rgba(24,105,224,0.87)
-        );
-      color: white;
+        radial-gradient(circle at 85% 20%, rgba(45, 131, 255, 0.20), transparent 30%),
+        radial-gradient(circle at 10% 90%, rgba(0, 90, 220, 0.12), transparent 35%),
+        linear-gradient(135deg, #eef6ff 0%, #ffffff 55%, #edf5ff 100%);
+      padding: 95px 22px 85px;
     }
 
-    .hero-content {
+    .hero-container {
       max-width: 1200px;
-      width: 100%;
       margin: auto;
-      padding: 80px 22px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
     }
 
-    .hero-small {
+    .hero-badge {
       display: inline-block;
-      background: rgba(255,255,255,0.14);
-      border: 1px solid rgba(255,255,255,0.3);
       padding: 8px 15px;
+      background: #e1efff;
+      color: #0757c9;
       border-radius: 30px;
       font-size: 14px;
+      font-weight: 700;
       margin-bottom: 20px;
     }
 
     .hero h1 {
-      font-size: clamp(42px,7vw,72px);
+      font-size: clamp(42px, 6vw, 70px);
       line-height: 1.05;
-      max-width: 780px;
+      letter-spacing: -2px;
+      color: #101a2c;
       margin-bottom: 22px;
     }
 
     .hero h1 span {
-      color: #8ed0ff;
+      color: #0757c9;
     }
 
-    .hero p {
-      max-width: 680px;
-      font-size: 19px;
-      color: #e9f3ff;
-      margin-bottom: 32px;
+    .hero-text {
+      font-size: 18px;
+      color: #5a6678;
+      max-width: 650px;
+      margin-bottom: 30px;
     }
 
     .hero-buttons {
@@ -176,405 +166,442 @@
       flex-wrap: wrap;
     }
 
-    .primary-btn,
-    .secondary-btn {
-      display: inline-block;
-      padding: 14px 24px;
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      cursor: pointer;
+      padding: 14px 23px;
       border-radius: 10px;
-      text-decoration: none;
       font-weight: 700;
+      font-size: 15px;
+      transition: 0.25s;
     }
 
-    .primary-btn {
-      background: white;
-      color: #1354a5;
-    }
-
-    .secondary-btn {
-      border: 1px solid rgba(255,255,255,0.65);
+    .btn-primary {
       color: white;
+      background: linear-gradient(135deg, #0757c9, #1684ff);
+      box-shadow: 0 10px 25px rgba(7, 87, 201, 0.22);
     }
 
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(7, 87, 201, 0.30);
+    }
 
-    /* ================= STATS ================= */
+    .btn-secondary {
+      background: white;
+      color: #0757c9;
+      border: 1px solid #cdddf2;
+    }
+
+    .btn-secondary:hover {
+      background: #f1f7ff;
+    }
+
+    .hero-card {
+      background: white;
+      border: 1px solid #e1e9f5;
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: 0 25px 60px rgba(28, 71, 120, 0.12);
+    }
+
+    .hero-card-top {
+      background: linear-gradient(135deg, #0757c9, #1684ff);
+      color: white;
+      padding: 28px;
+      border-radius: 20px;
+      margin-bottom: 22px;
+    }
+
+    .hero-card-top h3 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .hero-card-top p {
+      opacity: 0.9;
+    }
+
+    .hero-points {
+      display: grid;
+      gap: 14px;
+    }
+
+    .hero-point {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      color: #475469;
+      font-weight: 600;
+    }
+
+    .check {
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      background: #e6f3ff;
+      color: #0757c9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+    }
+
+    /* =========================
+       STATS
+    ========================= */
 
     .stats {
-      max-width: 1100px;
-      margin: -45px auto 0;
-      position: relative;
-      z-index: 5;
-      padding: 0 20px;
+      padding: 35px 22px;
+      background: white;
+      border-bottom: 1px solid #e7edf5;
     }
 
-    .stats-grid {
+    .stats-container {
+      max-width: 1100px;
+      margin: auto;
       display: grid;
-      grid-template-columns: repeat(4,1fr);
-      background: white;
-      border-radius: 18px;
-      box-shadow: 0 12px 40px rgba(23,61,112,0.12);
-      overflow: hidden;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
     }
 
     .stat {
-      padding: 27px 15px;
       text-align: center;
-      border-right: 1px solid #e8edf5;
-    }
-
-    .stat:last-child {
-      border-right: none;
+      padding: 15px;
     }
 
     .stat h3 {
-      font-size: 28px;
-      color: #1769e0;
+      color: #0757c9;
+      font-size: 32px;
+      margin-bottom: 3px;
     }
 
     .stat p {
-      color: #64748b;
+      color: #667286;
       font-size: 14px;
+      font-weight: 600;
     }
 
-
-    /* ================= GENERAL ================= */
+    /* =========================
+       GENERAL SECTION
+    ========================= */
 
     section {
-      padding: 90px 22px;
+      padding: 85px 22px;
     }
 
-    .container {
-      max-width: 1150px;
+    .section-container {
+      max-width: 1200px;
       margin: auto;
     }
 
-    .section-title {
+    .section-heading {
       text-align: center;
-      margin-bottom: 48px;
+      max-width: 700px;
+      margin: 0 auto 50px;
     }
 
-    .section-title .tag {
-      color: #1769e0;
-      font-weight: 800;
+    .section-heading span {
+      color: #0757c9;
       font-size: 14px;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
     }
 
-    .section-title h2 {
+    .section-heading h2 {
       font-size: 38px;
-      color: #12284d;
-      margin: 8px 0 12px;
+      color: #111b2e;
+      margin: 10px 0 13px;
     }
 
-    .section-title p {
-      max-width: 680px;
-      margin: auto;
-      color: #64748b;
+    .section-heading p {
+      color: #687487;
+      font-size: 16px;
     }
 
-
-    /* ================= ABOUT ================= */
+    /* =========================
+       ABOUT
+    ========================= */
 
     .about {
-      background: white;
+      background: #f7faff;
     }
 
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 55px;
+      gap: 60px;
       align-items: center;
     }
 
-    .about-image {
-      min-height: 390px;
+    .about-box {
+      background: white;
+      border: 1px solid #e3eaf3;
       border-radius: 22px;
-      background: #edf5ff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 18px 40px rgba(25,69,125,0.12);
+      padding: 35px;
+      box-shadow: 0 15px 45px rgba(20, 70, 130, 0.07);
     }
 
-    .about-image img {
-      max-width: 70%;
-      max-height: 260px;
-      object-fit: contain;
+    .about-box h3 {
+      color: #0757c9;
+      font-size: 26px;
+      margin-bottom: 15px;
     }
 
-    .about-text h2 {
-      font-size: 38px;
-      color: #12284d;
-      margin-bottom: 18px;
+    .about-box p {
+      color: #5e6a7c;
+      margin-bottom: 15px;
     }
 
-    .about-text p {
-      color: #5c6b82;
-      margin-bottom: 16px;
-    }
-
-    .check-list {
-      list-style: none;
+    .about-list {
+      display: grid;
+      gap: 12px;
       margin-top: 20px;
     }
 
-    .check-list li {
-      margin: 13px 0;
+    .about-list div {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: #445166;
       font-weight: 600;
-      color: #26364f;
     }
 
-    .check-list li::before {
-      content: "✓";
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 25px;
-      height: 25px;
-      margin-right: 10px;
-      border-radius: 50%;
-      background: #e2efff;
-      color: #1769e0;
-      font-weight: bold;
+    .about-highlight {
+      background: linear-gradient(135deg, #0757c9, #1684ff);
+      color: white;
+      padding: 42px;
+      border-radius: 25px;
+      box-shadow: 0 25px 55px rgba(7, 87, 201, 0.22);
     }
 
-
-    /* ================= FEATURES ================= */
-
-    .features {
-      background: #f5f9ff;
+    .about-highlight h3 {
+      font-size: 32px;
+      margin-bottom: 15px;
     }
 
-    .feature-grid {
+    .about-highlight p {
+      opacity: 0.92;
+      margin-bottom: 22px;
+    }
+
+    /* =========================
+       FEATURES
+    ========================= */
+
+    .features-grid {
       display: grid;
-      grid-template-columns: repeat(3,1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 22px;
     }
 
     .feature-card {
       background: white;
+      border: 1px solid #e3eaf3;
+      border-radius: 18px;
       padding: 30px;
-      border-radius: 17px;
-      border: 1px solid #e4ebf5;
       transition: 0.25s;
     }
 
     .feature-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 15px 35px rgba(32,79,140,0.11);
+      transform: translateY(-5px);
+      box-shadow: 0 18px 45px rgba(18, 70, 125, 0.10);
     }
 
     .feature-icon {
-      width: 52px;
-      height: 52px;
+      width: 55px;
+      height: 55px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #eaf3ff;
-      color: #1769e0;
-      border-radius: 13px;
-      font-size: 24px;
-      margin-bottom: 18px;
+      border-radius: 15px;
+      background: #e8f3ff;
+      color: #0757c9;
+      font-size: 25px;
+      margin-bottom: 20px;
     }
 
     .feature-card h3 {
-      color: #172f57;
-      margin-bottom: 9px;
+      margin-bottom: 10px;
+      color: #172033;
     }
 
     .feature-card p {
-      color: #66758d;
+      color: #667286;
       font-size: 15px;
     }
 
-
-    /* ================= PROGRAMS ================= */
+    /* =========================
+       PROGRAMS
+    ========================= */
 
     .programs {
-      background: white;
+      background: #f7faff;
     }
 
     .program-grid {
       display: grid;
-      grid-template-columns: repeat(3,1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 22px;
     }
 
-    .program {
-      border: 1px solid #e1e8f2;
-      border-radius: 17px;
-      padding: 28px;
-      background: linear-gradient(145deg,#ffffff,#f6faff);
+    .program-card {
+      background: white;
+      border: 1px solid #e0e8f3;
+      border-radius: 20px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .program-number {
-      font-size: 13px;
-      color: #1769e0;
-      font-weight: 800;
+    .program-card::before {
+      content: "";
+      position: absolute;
+      height: 4px;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: linear-gradient(90deg, #0757c9, #1684ff);
     }
 
-    .program h3 {
-      margin: 8px 0 10px;
-      color: #152e56;
+    .program-card h3 {
+      color: #172033;
+      font-size: 22px;
+      margin-bottom: 10px;
     }
 
-    .program p {
-      color: #66758d;
-      font-size: 15px;
+    .program-card p {
+      color: #687487;
+      margin-bottom: 18px;
     }
 
+    .program-card ul {
+      padding-left: 18px;
+      color: #4d5a6d;
+    }
 
-    /* ================= ADMISSION ================= */
+    .program-card li {
+      margin: 8px 0;
+    }
+
+    /* =========================
+       ADMISSION
+    ========================= */
 
     .admission {
-      background: #f5f9ff;
-    }
-
-    .admission-box {
-      max-width: 850px;
-      margin: auto;
       background: white;
-      border-radius: 22px;
-      padding: 40px;
-      box-shadow: 0 15px 45px rgba(25,69,125,0.10);
-      border: 1px solid #e2e9f3;
     }
 
-    .admission-header {
+    .admission-wrapper {
+      max-width: 950px;
+      margin: auto;
+      background: linear-gradient(135deg, #f2f8ff, #ffffff);
+      border: 1px solid #dfe9f6;
+      border-radius: 28px;
+      padding: 40px;
+      box-shadow: 0 20px 55px rgba(22, 70, 125, 0.09);
+    }
+
+    .admission-title {
       text-align: center;
       margin-bottom: 30px;
     }
 
-    .admission-header h2 {
-      color: #12284d;
+    .admission-title h2 {
+      color: #111b2e;
       font-size: 34px;
       margin-bottom: 8px;
     }
 
-    .admission-header p {
-      color: #68778e;
+    .admission-title p {
+      color: #687487;
     }
 
-    .form-grid {
+    .admission-form {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
     }
 
     .form-group {
-      margin-bottom: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
     }
 
-    .full-width {
+    .form-group.full {
       grid-column: 1 / -1;
     }
 
     .form-group label {
-      display: block;
-      margin-bottom: 7px;
-      color: #26364f;
+      color: #303b4d;
       font-size: 14px;
       font-weight: 700;
-    }
-
-    .required {
-      color: #d92d20;
     }
 
     .form-group input,
     .form-group select {
       width: 100%;
-      height: 50px;
-      border: 1px solid #d6dfeb;
+      padding: 14px 15px;
+      border: 1px solid #d6e0ed;
       border-radius: 10px;
-      padding: 0 14px;
       background: white;
       outline: none;
+      color: #1c2637;
       font-size: 15px;
-      color: #172033;
+      transition: 0.2s;
     }
 
     .form-group input:focus,
     .form-group select:focus {
-      border-color: #1769e0;
-      box-shadow: 0 0 0 3px rgba(23,105,224,0.10);
+      border-color: #1684ff;
+      box-shadow: 0 0 0 3px rgba(22, 132, 255, 0.10);
     }
 
-    .field-note {
-      display: block;
+    .form-note {
+      grid-column: 1 / -1;
+      color: #6b7687;
+      font-size: 13px;
+      margin-top: -5px;
+    }
+
+    .form-buttons {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
       margin-top: 5px;
-      color: #8592a6;
-      font-size: 12px;
-    }
-
-    .send-title {
-      grid-column: 1 / -1;
-      color: #17345f;
-      font-size: 16px;
-      font-weight: 700;
-      margin-top: 8px;
-    }
-
-    .send-buttons {
-      grid-column: 1 / -1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .send-btn {
-      height: 52px;
-      border: none;
-      border-radius: 10px;
-      color: white;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
     }
 
     .whatsapp-btn {
-      background: #20a95b;
-    }
-
-    .whatsapp-btn:hover {
-      background: #168d49;
-    }
-
-    .email-btn {
-      background: #1769e0;
-    }
-
-    .email-btn:hover {
-      background: #0d52b5;
-    }
-
-    .form-message {
-      grid-column: 1 / -1;
-      display: none;
-      padding: 12px;
-      border-radius: 9px;
-      font-size: 13px;
-    }
-
-    .form-message.error {
-      display: block;
-      color: #b42318;
-      background: #fff0f0;
-      border: 1px solid #ffd0d0;
-    }
-
-
-    /* ================= CTA ================= */
-
-    .cta {
-      padding: 75px 22px;
-      background: linear-gradient(110deg,#0b3475,#1769e0);
+      background: #168b55;
       color: white;
     }
 
-    .cta-box {
-      max-width: 1000px;
-      margin: auto;
+    .whatsapp-btn:hover {
+      background: #117747;
+    }
+
+    .email-btn {
+      background: #0757c9;
+      color: white;
+    }
+
+    .email-btn:hover {
+      background: #0648a6;
+    }
+
+    /* =========================
+       CTA
+    ========================= */
+
+    .cta {
+      background: linear-gradient(135deg, #0757c9, #1684ff);
+      color: white;
       text-align: center;
     }
 
@@ -584,340 +611,357 @@
     }
 
     .cta p {
-      max-width: 650px;
-      margin: auto auto 25px;
-      color: #e7f1ff;
+      max-width: 700px;
+      margin: 0 auto 25px;
+      opacity: 0.92;
     }
 
+    .cta .btn {
+      background: white;
+      color: #0757c9;
+    }
 
-    /* ================= CONTACT ================= */
+    /* =========================
+       CONTACT
+    ========================= */
 
     .contact {
-      background: #f5f9ff;
+      background: #f7faff;
     }
 
     .contact-grid {
       display: grid;
-      grid-template-columns: repeat(3,1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 22px;
     }
 
     .contact-card {
       background: white;
+      border: 1px solid #e1e9f3;
+      border-radius: 18px;
       padding: 28px;
       text-align: center;
-      border-radius: 17px;
-      border: 1px solid #e1e8f2;
     }
 
-    .contact-card .icon {
-      font-size: 28px;
-      margin-bottom: 12px;
+    .contact-icon {
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e8f3ff;
+      color: #0757c9;
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      font-size: 22px;
     }
 
     .contact-card h3 {
-      color: #17345f;
       margin-bottom: 7px;
+      color: #172033;
     }
 
     .contact-card p,
     .contact-card a {
-      color: #61718a;
-      text-decoration: none;
+      color: #687487;
+      font-size: 15px;
+      word-break: break-word;
     }
 
     .contact-card a:hover {
-      color: #1769e0;
+      color: #0757c9;
     }
 
-
-    /* ================= FOOTER ================= */
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
-      background: #091a35;
-      color: #dce7f6;
-      padding: 45px 22px 20px;
+      background: #0b1628;
+      color: white;
+      padding: 45px 22px 25px;
     }
 
-    .footer-grid {
-      max-width: 1150px;
+    .footer-container {
+      max-width: 1200px;
       margin: auto;
       display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr;
-      gap: 40px;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 45px;
     }
 
     .footer-brand {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 14px;
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 12px;
     }
 
-    .footer-brand img {
-      width: 42px;
-      height: 42px;
-      object-fit: contain;
-      background: white;
-      border-radius: 8px;
-    }
-
-    footer h3 {
-      color: white;
-      margin-bottom: 15px;
-    }
-
-    footer p,
-    footer a {
-      color: #aebed4;
+    .footer-column p {
+      color: #aab5c5;
       font-size: 14px;
     }
 
-    footer a {
-      text-decoration: none;
-      display: block;
-      margin: 7px 0;
+    .footer-column h3 {
+      margin-bottom: 15px;
+      font-size: 17px;
     }
 
-    footer a:hover {
+    .footer-column a {
+      display: block;
+      color: #aab5c5;
+      margin: 9px 0;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .footer-column a:hover {
       color: white;
     }
 
-    .copyright {
-      max-width: 1150px;
+    .footer-bottom {
+      max-width: 1200px;
       margin: 35px auto 0;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      text-align: center;
-      color: #91a4be;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      color: #8e9aac;
       font-size: 13px;
+      text-align: center;
     }
 
+    /* =========================
+       RESPONSIVE
+    ========================= */
 
-    /* ================= MOBILE ================= */
-
-    @media (max-width:850px) {
-
-      .menu-btn {
-        display: block;
-      }
-
-      nav {
-        position: absolute;
-        top: 76px;
-        left: 0;
-        width: 100%;
-        background: white;
-        display: none;
-        flex-direction: column;
-        padding: 20px;
-        gap: 18px;
-        border-bottom: 1px solid #e4e9f1;
-      }
-
-      nav.active {
-        display: flex;
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(2,1fr);
-      }
-
+    @media (max-width: 900px) {
+      .hero-container,
       .about-grid {
         grid-template-columns: 1fr;
       }
 
-      .feature-grid,
+      .hero-card {
+        max-width: 650px;
+        margin: auto;
+      }
+
+      .features-grid,
       .program-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .contact-grid {
         grid-template-columns: 1fr;
       }
 
-      .footer-grid {
+      .footer-container {
         grid-template-columns: 1fr 1fr;
       }
     }
 
-
-    @media (max-width:580px) {
-
-      .brand-text {
-        font-size: 17px;
+    @media (max-width: 700px) {
+      .nav-container {
+        min-height: 65px;
       }
 
-      .brand img {
-        width: 40px;
-        height: 40px;
+      .menu-btn {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 65px;
+        background: white;
+        border-bottom: 1px solid #e5eaf2;
+        padding: 18px 22px;
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 17px;
+        box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+      }
+
+      .nav-links.active {
+        display: flex;
       }
 
       .hero {
-        min-height: 590px;
+        padding-top: 65px;
       }
 
       .hero h1 {
         font-size: 43px;
       }
 
-      .hero p {
-        font-size: 16px;
+      .stats-container {
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .stats-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .section-title h2,
-      .about-text h2 {
-        font-size: 31px;
-      }
-
-      .feature-grid,
-      .program-grid,
-      .footer-grid {
+      .features-grid,
+      .program-grid {
         grid-template-columns: 1fr;
       }
 
-      .admission-box {
+      .admission-wrapper {
         padding: 25px 18px;
       }
 
-      .form-grid {
+      .admission-form {
         grid-template-columns: 1fr;
       }
 
-      .full-width,
-      .send-title,
-      .send-buttons,
-      .form-message {
+      .form-group.full {
         grid-column: auto;
       }
 
-      .send-buttons {
-        grid-template-columns: 1fr;
+      .form-note,
+      .form-buttons {
+        grid-column: auto;
       }
 
-      section {
-        padding: 70px 18px;
+      .form-buttons .btn {
+        width: 100%;
+      }
+
+      .section-heading h2 {
+        font-size: 31px;
+      }
+
+      .cta h2 {
+        font-size: 31px;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
       }
     }
 
+    @media (max-width: 430px) {
+      .brand {
+        font-size: 17px;
+      }
+
+      .logo {
+        width: 42px;
+        height: 42px;
+      }
+
+      .hero h1 {
+        font-size: 37px;
+      }
+
+      .stats-container {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat h3 {
+        font-size: 27px;
+      }
+    }
   </style>
-
 </head>
-
 
 <body>
 
+  <!-- =========================
+       NAVBAR
+  ========================== -->
 
-  <!-- ================= NAVBAR ================= -->
+  <header class="navbar">
+    <div class="nav-container">
 
-  <header>
-
-    <div class="navbar">
-
-      <a
-        href="#home"
-        class="brand"
-      >
-
-        <img
-          src="logo.png.png"
-          alt="Rise Tuition Hub Logo"
-        >
-
-        <span class="brand-text">
-          Rise Tuition Hub
-        </span>
-
+      <a href="#home" class="logo-area">
+        <img src="logo.png.png" alt="Rise Tuition Hub Logo" class="logo">
+        <span class="brand">Rise Tuition Hub</span>
       </a>
 
-
-      <button
-        class="menu-btn"
-        onclick="toggleMenu()"
-      >
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">
         ☰
       </button>
 
-
-      <nav id="mainNav">
-
-        <a href="#home" onclick="closeMenu()">
-          Home
-        </a>
-
-        <a href="#about" onclick="closeMenu()">
-          About
-        </a>
-
-        <a href="#programs" onclick="closeMenu()">
-          Programs
-        </a>
-
-        <a href="#admission" onclick="closeMenu()">
-          Admission
-        </a>
-
-        <a href="#contact" onclick="closeMenu()">
-          Contact
-        </a>
-
-        <a
-          href="login.html"
-          class="admin-btn"
-        >
-          Admin Login
-        </a>
-
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" onclick="closeMenu()">Home</a>
+        <a href="#about" onclick="closeMenu()">About</a>
+        <a href="#programs" onclick="closeMenu()">Programs</a>
+        <a href="#admission" onclick="closeMenu()">Admission</a>
+        <a href="#contact" onclick="closeMenu()">Contact</a>
       </nav>
 
     </div>
-
   </header>
 
 
-  <!-- ================= HERO ================= -->
+  <!-- =========================
+       HERO
+  ========================== -->
 
-  <section
-    class="hero"
-    id="home"
-  >
+  <section class="hero" id="home">
 
-    <div class="hero-content">
+    <div class="hero-container">
 
-      <div class="hero-small">
-        📚 Learn • Improve • Rise
+      <div>
+
+        <span class="hero-badge">
+          Quality Education • Personal Attention
+        </span>
+
+        <h1>
+          Learn Today.<br>
+          <span>Lead Tomorrow.</span>
+        </h1>
+
+        <p class="hero-text">
+          Welcome to Rise Tuition Hub — a focused learning environment
+          designed to help students understand concepts, improve confidence,
+          and achieve better academic results.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#admission" class="btn btn-primary">
+            Apply for Admission
+          </a>
+
+          <a href="#programs" class="btn btn-secondary">
+            Explore Programs
+          </a>
+        </div>
+
       </div>
 
-      <h1>
-        Build Strong Foundations.
-        <br>
-        <span>Rise Higher.</span>
-      </h1>
 
-      <p>
-        Rise Tuition Hub helps students learn with personal attention,
-        structured guidance, regular practice and continuous academic support.
-      </p>
+      <div class="hero-card">
 
-      <div class="hero-buttons">
+        <div class="hero-card-top">
+          <h3>Build a Strong Academic Future</h3>
+          <p>
+            Structured learning with individual attention and regular guidance.
+          </p>
+        </div>
 
-        <a
-          href="#admission"
-          class="primary-btn"
-        >
-          Apply for Admission
-        </a>
+        <div class="hero-points">
 
-        <a
-          href="#programs"
-          class="secondary-btn"
-        >
-          Explore Programs
-        </a>
+          <div class="hero-point">
+            <span class="check">✓</span>
+            Experienced teaching and guidance
+          </div>
+
+          <div class="hero-point">
+            <span class="check">✓</span>
+            Concept-focused learning
+          </div>
+
+          <div class="hero-point">
+            <span class="check">✓</span>
+            Regular academic support
+          </div>
+
+          <div class="hero-point">
+            <span class="check">✓</span>
+            Personal attention to students
+          </div>
+
+        </div>
 
       </div>
 
@@ -926,98 +970,313 @@
   </section>
 
 
-  <!-- ================= STATS ================= -->
+  <!-- =========================
+       STATS
+  ========================== -->
 
-  <div class="stats">
+  <section class="stats">
 
-    <div class="stats-grid">
+    <div class="stats-container">
 
       <div class="stat">
-        <h3>100%</h3>
-        <p>Personal Attention</p>
+        <h3>6th–12th</h3>
+        <p>Classes Covered</p>
       </div>
 
       <div class="stat">
         <h3>1:1</h3>
-        <p>Student Guidance</p>
+        <p>Personal Attention</p>
       </div>
 
       <div class="stat">
-        <h3>Regular</h3>
-        <p>Performance Tracking</p>
+        <h3>100%</h3>
+        <p>Focused Learning</p>
       </div>
 
       <div class="stat">
-        <h3>Focused</h3>
-        <p>Academic Support</p>
+        <h3>✓</h3>
+        <p>Regular Guidance</p>
       </div>
 
     </div>
 
-  </div>
+  </section>
 
 
-  <!-- ================= ABOUT ================= -->
+  <!-- =========================
+       ABOUT
+  ========================== -->
 
-  <section
-    class="about"
-    id="about"
-  >
+  <section class="about" id="about">
 
-    <div class="container">
+    <div class="section-container">
+
+      <div class="section-heading">
+
+        <span>About Us</span>
+
+        <h2>Education That Builds Confidence</h2>
+
+        <p>
+          We focus on making learning simple, structured, and understandable
+          for every student.
+        </p>
+
+      </div>
+
 
       <div class="about-grid">
 
-        <div class="about-image">
+        <div class="about-box">
 
-          <img
-            src="logo.png.png"
-            alt="Rise Tuition Hub"
-          >
+          <h3>Why Rise Tuition Hub?</h3>
 
-        </div>
+          <p>
+            Rise Tuition Hub provides students with a supportive academic
+            environment where they can strengthen their fundamentals and
+            work consistently towards their goals.
+          </p>
 
+          <p>
+            Our approach combines concept clarity, practice, regular
+            guidance, and individual attention.
+          </p>
 
-        <div class="about-text">
+          <div class="about-list">
 
-          <div
-            class="section-title"
-            style="text-align:left;margin-bottom:20px;"
-          >
+            <div>
+              <span class="check">✓</span>
+              Strong conceptual foundation
+            </div>
 
-            <div class="tag">
-              About Rise Tuition Hub
+            <div>
+              <span class="check">✓</span>
+              Student-focused teaching
+            </div>
+
+            <div>
+              <span class="check">✓</span>
+              Regular progress monitoring
+            </div>
+
+            <div>
+              <span class="check">✓</span>
+              Supportive learning environment
             </div>
 
           </div>
 
-          <h2>
-            Education that helps students rise.
-          </h2>
+        </div>
+
+
+        <div class="about-highlight">
+
+          <h3>Grow. Learn. Rise.</h3>
 
           <p>
-            Rise Tuition Hub is focused on helping students understand
-            concepts clearly, strengthen their basics and develop
-            consistent study habits.
+            Every student has the potential to improve with the right
+            guidance, consistency, and learning environment.
           </p>
+
+          <a href="#admission" class="btn">
+            Start Your Journey
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FEATURES
+  ========================== -->
+
+  <section>
+
+    <div class="section-container">
+
+      <div class="section-heading">
+
+        <span>Our Approach</span>
+
+        <h2>Everything Students Need to Improve</h2>
+
+        <p>
+          A balanced approach designed around understanding and consistent
+          academic progress.
+        </p>
+
+      </div>
+
+
+      <div class="features-grid">
+
+        <div class="feature-card">
+
+          <div class="feature-icon">📚</div>
+
+          <h3>Concept Clarity</h3>
 
           <p>
-            Our approach combines classroom learning, practice,
-            individual attention and regular performance monitoring.
+            Learn the fundamentals clearly instead of simply memorising
+            answers.
           </p>
 
-          <ul class="check-list">
+        </div>
 
-            <li>Concept-focused learning</li>
 
-            <li>Personal attention to students</li>
+        <div class="feature-card">
 
-            <li>Regular academic monitoring</li>
+          <div class="feature-icon">🎯</div>
 
-            <li>Practice and doubt support</li>
+          <h3>Goal Focused</h3>
 
-            <li>Parent-focused progress updates</li>
+          <p>
+            Study with clear academic goals and a structured learning
+            approach.
+          </p>
 
+        </div>
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">👨‍🏫</div>
+
+          <h3>Personal Guidance</h3>
+
+          <p>
+            Students receive guidance according to their individual learning
+            needs.
+          </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">📝</div>
+
+          <h3>Regular Practice</h3>
+
+          <p>
+            Consistent practice helps students strengthen their concepts and
+            confidence.
+          </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">📈</div>
+
+          <h3>Progress Tracking</h3>
+
+          <p>
+            Academic progress can be monitored to identify areas that need
+            additional attention.
+          </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">🏆</div>
+
+          <h3>Better Results</h3>
+
+          <p>
+            Build strong academic habits that support better performance over
+            time.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PROGRAMS
+  ========================== -->
+
+  <section class="programs" id="programs">
+
+    <div class="section-container">
+
+      <div class="section-heading">
+
+        <span>Programs</span>
+
+        <h2>Classes for Students from 6th to 12th</h2>
+
+        <p>
+          Academic support designed for different stages of school education.
+        </p>
+
+      </div>
+
+
+      <div class="program-grid">
+
+        <div class="program-card">
+
+          <h3>Middle School</h3>
+
+          <p>
+            Classes 6th to 8th
+          </p>
+
+          <ul>
+            <li>Strong fundamentals</li>
+            <li>Concept building</li>
+            <li>Regular practice</li>
+            <li>School exam preparation</li>
+          </ul>
+
+        </div>
+
+
+        <div class="program-card">
+
+          <h3>Secondary School</h3>
+
+          <p>
+            Classes 9th to 10th
+          </p>
+
+          <ul>
+            <li>Detailed concept learning</li>
+            <li>Board-oriented preparation</li>
+            <li>Practice and revision</li>
+            <li>Regular academic guidance</li>
+          </ul>
+
+        </div>
+
+
+        <div class="program-card">
+
+          <h3>Senior Secondary</h3>
+
+          <p>
+            Classes 11th to 12th
+          </p>
+
+          <ul>
+            <li>Subject-focused learning</li>
+            <li>Advanced concepts</li>
+            <li>Exam preparation</li>
+            <li>Goal-oriented academic support</li>
           </ul>
 
         </div>
@@ -1029,462 +1288,158 @@
   </section>
 
 
-  <!-- ================= FEATURES ================= -->
+  <!-- =========================
+       ADMISSION
+  ========================== -->
 
-  <section
-    class="features"
-    id="features"
-  >
+  <section class="admission" id="admission">
 
-    <div class="container">
+    <div class="section-container">
 
-      <div class="section-title">
+      <div class="admission-wrapper">
 
-        <div class="tag">
-          Why Rise Tuition Hub
-        </div>
+        <div class="admission-title">
 
-        <h2>
-          A Better Way to Learn
-        </h2>
-
-        <p>
-          A structured learning environment designed around
-          understanding, consistency and student progress.
-        </p>
-
-      </div>
-
-
-      <div class="feature-grid">
-
-        <div class="feature-card">
-
-          <div class="feature-icon">🎯</div>
-
-          <h3>
-            Focused Learning
-          </h3>
+          <h2>Admission Form</h2>
 
           <p>
-            Lessons are structured to help students understand
-            topics instead of simply memorising answers.
+            Fill in your details and send your admission enquiry directly to
+            Rise Tuition Hub.
           </p>
 
         </div>
 
 
-        <div class="feature-card">
-
-          <div class="feature-icon">👨‍🏫</div>
-
-          <h3>
-            Personal Attention
-          </h3>
-
-          <p>
-            Students receive guidance according to their
-            learning needs, doubts and academic progress.
-          </p>
-
-        </div>
-
-
-        <div class="feature-card">
-
-          <div class="feature-icon">📊</div>
-
-          <h3>
-            Progress Tracking
-          </h3>
-
-          <p>
-            Regular performance monitoring helps identify
-            areas that need more practice.
-          </p>
-
-        </div>
-
-
-        <div class="feature-card">
-
-          <div class="feature-icon">📝</div>
-
-          <h3>
-            Regular Practice
-          </h3>
-
-          <p>
-            Practice and revision strengthen concepts
-            and improve confidence.
-          </p>
-
-        </div>
-
-
-        <div class="feature-card">
-
-          <div class="feature-icon">💡</div>
-
-          <h3>
-            Doubt Support
-          </h3>
-
-          <p>
-            Students can clarify questions and work through
-            difficult concepts with guidance.
-          </p>
-
-        </div>
-
-
-        <div class="feature-card">
-
-          <div class="feature-icon">📈</div>
-
-          <h3>
-            Continuous Improvement
-          </h3>
-
-          <p>
-            Consistent academic improvement through learning,
-            practice and feedback.
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ================= PROGRAMS ================= -->
-
-  <section
-    class="programs"
-    id="programs"
-  >
-
-    <div class="container">
-
-      <div class="section-title">
-
-        <div class="tag">
-          Programs
-        </div>
-
-        <h2>
-          Learning Support for Students
-        </h2>
-
-        <p>
-          Academic support can be structured according to
-          the student's class, subjects and requirements.
-        </p>
-
-      </div>
-
-
-      <div class="program-grid">
-
-        <div class="program">
-          <div class="program-number">01</div>
-          <h3>School Support</h3>
-          <p>
-            Strengthen school subjects, understand classroom
-            concepts and maintain regular revision.
-          </p>
-        </div>
-
-
-        <div class="program">
-          <div class="program-number">02</div>
-          <h3>Concept Building</h3>
-          <p>
-            Build strong fundamentals through explanations,
-            examples and guided practice.
-          </p>
-        </div>
-
-
-        <div class="program">
-          <div class="program-number">03</div>
-          <h3>Exam Preparation</h3>
-          <p>
-            Prepare through revision, practice questions,
-            tests and performance-based improvement.
-          </p>
-        </div>
-
-
-        <div class="program">
-          <div class="program-number">04</div>
-          <h3>Homework Support</h3>
-          <p>
-            Get structured support for homework and difficult
-            topics while developing independent learning.
-          </p>
-        </div>
-
-
-        <div class="program">
-          <div class="program-number">05</div>
-          <h3>Revision & Practice</h3>
-          <p>
-            Regular revision helps students retain concepts
-            and become more confident.
-          </p>
-        </div>
-
-
-        <div class="program">
-          <div class="program-number">06</div>
-          <h3>Progress Guidance</h3>
-          <p>
-            Track academic progress and identify subjects
-            requiring additional attention.
-          </p>
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ================= ADMISSION ================= -->
-
-  <section
-    class="admission"
-    id="admission"
-  >
-
-    <div class="container">
-
-      <div class="admission-box">
-
-        <div class="admission-header">
-
-          <div class="section-title" style="margin-bottom:10px;">
-
-            <div class="tag">
-              Admissions
-            </div>
+        <form class="admission-form" id="admissionForm">
+
+          <div class="form-group">
+
+            <label for="studentName">
+              Student Name *
+            </label>
+
+            <input
+              type="text"
+              id="studentName"
+              placeholder="Enter student name"
+              required
+            >
 
           </div>
 
-          <h2>
-            Apply for Admission
-          </h2>
 
-          <p>
-            Fill in the details below and send your admission
-            request directly to Rise Tuition Hub.
+          <div class="form-group">
+
+            <label for="studentClass">
+              Class *
+            </label>
+
+            <select id="studentClass" required>
+
+              <option value="">Select Class</option>
+
+              <option value="6th">6th</option>
+              <option value="7th">7th</option>
+              <option value="8th">8th</option>
+              <option value="9th">9th</option>
+              <option value="10th">10th</option>
+              <option value="11th">11th</option>
+              <option value="12th">12th</option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="schoolName">
+              School Name *
+            </label>
+
+            <input
+              type="text"
+              id="schoolName"
+              placeholder="Enter school name"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="studentPhone">
+              Student Phone
+            </label>
+
+            <input
+              type="tel"
+              id="studentPhone"
+              placeholder="10-digit phone number"
+              maxlength="10"
+              inputmode="numeric"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="parentPhone">
+              Parent Phone *
+            </label>
+
+            <input
+              type="tel"
+              id="parentPhone"
+              placeholder="10-digit parent phone number"
+              maxlength="10"
+              inputmode="numeric"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="studentEmail">
+              Email *
+            </label>
+
+            <input
+              type="email"
+              id="studentEmail"
+              placeholder="Enter email address"
+              required
+            >
+
+          </div>
+
+
+          <p class="form-note">
+            * Required fields. Phone numbers must contain exactly 10 digits.
           </p>
 
-        </div>
 
-
-        <form id="admissionForm">
-
-          <div class="form-grid">
-
-
-            <!-- Student Name -->
-
-            <div class="form-group full-width">
-
-              <label for="studentName">
-                Student Name
-                <span class="required">*</span>
-              </label>
-
-              <input
-                type="text"
-                id="studentName"
-                placeholder="Enter student's full name"
-                required
-              >
-
-            </div>
-
-
-            <!-- Class -->
-
-            <div class="form-group">
-
-              <label for="studentClass">
-                Class
-                <span class="required">*</span>
-              </label>
-
-              <select
-                id="studentClass"
-                required
-              >
-
-                <option value="">
-                  Select Class
-                </option>
-
-                <option value="6th">
-                  6th
-                </option>
-
-                <option value="7th">
-                  7th
-                </option>
-
-                <option value="8th">
-                  8th
-                </option>
-
-                <option value="9th">
-                  9th
-                </option>
-
-                <option value="10th">
-                  10th
-                </option>
-
-                <option value="11th">
-                  11th
-                </option>
-
-                <option value="12th">
-                  12th
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <!-- School -->
-
-            <div class="form-group">
-
-              <label for="schoolName">
-                School Name
-                <span class="required">*</span>
-              </label>
-
-              <input
-                type="text"
-                id="schoolName"
-                placeholder="Enter school name"
-                required
-              >
-
-            </div>
-
-
-            <!-- Student Phone -->
-
-            <div class="form-group">
-
-              <label for="studentPhone">
-                Student Phone
-              </label>
-
-              <input
-                type="tel"
-                id="studentPhone"
-                placeholder="10-digit number"
-                maxlength="10"
-                inputmode="numeric"
-              >
-
-              <span class="field-note">
-                Optional • 10 digits only
-              </span>
-
-            </div>
-
-
-            <!-- Parent Phone -->
-
-            <div class="form-group">
-
-              <label for="parentPhone">
-                Parent Phone
-                <span class="required">*</span>
-              </label>
-
-              <input
-                type="tel"
-                id="parentPhone"
-                placeholder="10-digit number"
-                maxlength="10"
-                inputmode="numeric"
-                required
-              >
-
-              <span class="field-note">
-                Required • 10 digits only
-              </span>
-
-            </div>
-
-
-            <!-- Email -->
-
-            <div class="form-group full-width">
-
-              <label for="studentEmail">
-                Email
-                <span class="required">*</span>
-              </label>
-
-              <input
-                type="email"
-                id="studentEmail"
-                placeholder="Enter email address"
-                required
-              >
-
-            </div>
-
-
-            <div
-              id="formMessage"
-              class="form-message"
-            ></div>
-
-
-            <!-- Send -->
-
-            <div class="send-title">
-
-              Send Admission Request Via:
-
-            </div>
-
-
-            <div class="send-buttons">
-
-              <button
-                type="button"
-                class="send-btn whatsapp-btn"
-                onclick="sendAdmission('whatsapp')"
-              >
-                💬 Send via WhatsApp
-              </button>
-
-
-              <button
-                type="button"
-                class="send-btn email-btn"
-                onclick="sendAdmission('email')"
-              >
-                ✉️ Send via Email
-              </button>
-
-            </div>
-
+          <div class="form-buttons">
+
+            <button
+              type="button"
+              class="btn whatsapp-btn"
+              onclick="sendAdmission('whatsapp')"
+            >
+              Send via WhatsApp
+            </button>
+
+            <button
+              type="button"
+              class="btn email-btn"
+              onclick="sendAdmission('email')"
+            >
+              Send via Email
+            </button>
 
           </div>
 
@@ -1497,26 +1452,23 @@
   </section>
 
 
-  <!-- ================= CTA ================= -->
+  <!-- =========================
+       CTA
+  ========================== -->
 
   <section class="cta">
 
-    <div class="cta-box">
+    <div class="section-container">
 
-      <h2>
-        Ready to Rise?
-      </h2>
+      <h2>Ready to Rise?</h2>
 
       <p>
-        Get in touch with Rise Tuition Hub to learn more
-        about classes, admissions and academic support.
+        Take the first step towards a stronger academic journey.
+        Submit your admission enquiry today.
       </p>
 
-      <a
-        href="#admission"
-        class="primary-btn"
-      >
-        Apply for Admission
+      <a href="#admission" class="btn">
+        Apply Now
       </a>
 
     </div>
@@ -1524,28 +1476,23 @@
   </section>
 
 
-  <!-- ================= CONTACT ================= -->
+  <!-- =========================
+       CONTACT
+  ========================== -->
 
-  <section
-    class="contact"
-    id="contact"
-  >
+  <section class="contact" id="contact">
 
-    <div class="container">
+    <div class="section-container">
 
-      <div class="section-title">
+      <div class="section-heading">
 
-        <div class="tag">
-          Get In Touch
-        </div>
+        <span>Contact Us</span>
 
-        <h2>
-          Contact Rise Tuition Hub
-        </h2>
+        <h2>Let's Connect</h2>
 
         <p>
-          Have a question about admission or classes?
-          Contact us directly.
+          Contact Rise Tuition Hub for admission enquiries and more
+          information.
         </p>
 
       </div>
@@ -1553,16 +1500,13 @@
 
       <div class="contact-grid">
 
-
         <div class="contact-card">
 
-          <div class="icon">
+          <div class="contact-icon">
             📱
           </div>
 
-          <h3>
-            WhatsApp / Phone
-          </h3>
+          <h3>WhatsApp</h3>
 
           <a
             href="https://wa.me/918228143000"
@@ -1576,17 +1520,13 @@
 
         <div class="contact-card">
 
-          <div class="icon">
+          <div class="contact-icon">
             ✉️
           </div>
 
-          <h3>
-            Email
-          </h3>
+          <h3>Email</h3>
 
-          <a
-            href="mailto:rittu3308@gmail.com"
-          >
+          <a href="mailto:rittu3308@gmail.com">
             rittu3308@gmail.com
           </a>
 
@@ -1595,17 +1535,14 @@
 
         <div class="contact-card">
 
-          <div class="icon">
-            📚
+          <div class="contact-icon">
+            🎓
           </div>
 
-          <h3>
-            Admissions
-          </h3>
+          <h3>Admissions</h3>
 
           <p>
-            Contact us for admission information
-            and class details.
+            Classes 6th to 12th
           </p>
 
         </div>
@@ -1617,387 +1554,246 @@
   </section>
 
 
-  <!-- ================= FOOTER ================= -->
+  <!-- =========================
+       FOOTER
+  ========================== -->
 
   <footer>
 
-    <div class="footer-grid">
+    <div class="footer-container">
 
-
-      <div>
+      <div class="footer-column">
 
         <div class="footer-brand">
-
-          <img
-            src="logo.png.png"
-            alt="Rise Tuition Hub Logo"
-          >
-
-          <h3>
-            Rise Tuition Hub
-          </h3>
-
+          Rise Tuition Hub
         </div>
 
         <p>
-          Helping students learn, improve and rise through
-          structured academic support and personal attention.
+          Learn Today. Lead Tomorrow.
+          Quality academic support for students from Class 6th to 12th.
         </p>
 
       </div>
 
 
-      <div>
+      <div class="footer-column">
 
-        <h3>
-          Quick Links
-        </h3>
+        <h3>Quick Links</h3>
 
-        <a href="#home">
-          Home
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#programs">Programs</a>
+        <a href="#admission">Admission</a>
+        <a href="#contact">Contact</a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>Contact</h3>
+
+        <a href="https://wa.me/918228143000" target="_blank">
+          WhatsApp
         </a>
 
-        <a href="#about">
-          About
-        </a>
-
-        <a href="#programs">
-          Programs
+        <a href="mailto:rittu3308@gmail.com">
+          Email
         </a>
 
         <a href="#admission">
-          Admission
-        </a>
-
-        <a href="#contact">
-          Contact
+          Apply for Admission
         </a>
 
       </div>
-
-
-      <div>
-
-        <h3>
-          Admin
-        </h3>
-
-        <a href="login.html">
-          Admin Login
-        </a>
-
-        <p>
-          Authorized administration only.
-        </p>
-
-      </div>
-
 
     </div>
 
 
-    <div class="copyright">
+    <div class="footer-bottom">
 
-      ©
-      <span id="year"></span>
-      Rise Tuition Hub.
-      All Rights Reserved.
+      © <span id="year"></span> Rise Tuition Hub. All Rights Reserved.
 
     </div>
 
   </footer>
 
 
-  <!-- ================= JAVASCRIPT ================= -->
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
 
   <script>
 
-
-    /* ================= NAVIGATION ================= */
+    /* Mobile Menu */
 
     function toggleMenu() {
-
-      document
-        .getElementById("mainNav")
-        .classList.toggle("active");
-
+      document.getElementById("navLinks").classList.toggle("active");
     }
 
 
     function closeMenu() {
-
-      document
-        .getElementById("mainNav")
-        .classList.remove("active");
-
+      document.getElementById("navLinks").classList.remove("active");
     }
 
+
+    /* Current Year */
 
     document.getElementById("year").textContent =
       new Date().getFullYear();
 
 
-    /* ================= PHONE INPUT ================= */
+    /* Allow only numbers in phone fields */
 
-    function onlyNumbers(input) {
-
-      input.value =
-        input.value
-          .replace(/\D/g, "")
-          .slice(0, 10);
-
-    }
+    document.getElementById("studentPhone").addEventListener("input", function () {
+      this.value = this.value.replace(/\D/g, "").slice(0, 10);
+    });
 
 
-    document
-      .getElementById("studentPhone")
-      .addEventListener(
-        "input",
-        function() {
-          onlyNumbers(this);
-        }
-      );
+    document.getElementById("parentPhone").addEventListener("input", function () {
+      this.value = this.value.replace(/\D/g, "").slice(0, 10);
+    });
 
 
-    document
-      .getElementById("parentPhone")
-      .addEventListener(
-        "input",
-        function() {
-          onlyNumbers(this);
-        }
-      );
-
-
-    /* ================= ADMISSION ================= */
+    /* Admission Validation */
 
     function getAdmissionData() {
 
+      const studentName =
+        document.getElementById("studentName").value.trim();
+
+      const studentClass =
+        document.getElementById("studentClass").value;
+
+      const schoolName =
+        document.getElementById("schoolName").value.trim();
+
+      const studentPhone =
+        document.getElementById("studentPhone").value.trim();
+
+      const parentPhone =
+        document.getElementById("parentPhone").value.trim();
+
+      const studentEmail =
+        document.getElementById("studentEmail").value.trim();
+
+
+      if (!studentName) {
+        alert("Please enter the student's name.");
+        return null;
+      }
+
+
+      if (!studentClass) {
+        alert("Please select the student's class.");
+        return null;
+      }
+
+
+      if (!schoolName) {
+        alert("Please enter the school name.");
+        return null;
+      }
+
+
+      if (studentPhone && !/^\d{10}$/.test(studentPhone)) {
+        alert("Student phone number must contain exactly 10 digits.");
+        return null;
+      }
+
+
+      if (!/^\d{10}$/.test(parentPhone)) {
+        alert("Parent phone number must contain exactly 10 digits.");
+        return null;
+      }
+
+
+      if (!studentEmail) {
+        alert("Please enter the email address.");
+        return null;
+      }
+
+
+      const emailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailPattern.test(studentEmail)) {
+        alert("Please enter a valid email address.");
+        return null;
+      }
+
+
       return {
-
-        studentName:
-          document
-            .getElementById("studentName")
-            .value
-            .trim(),
-
-        studentClass:
-          document
-            .getElementById("studentClass")
-            .value,
-
-        schoolName:
-          document
-            .getElementById("schoolName")
-            .value
-            .trim(),
-
-        studentPhone:
-          document
-            .getElementById("studentPhone")
-            .value
-            .trim(),
-
-        parentPhone:
-          document
-            .getElementById("parentPhone")
-            .value
-            .trim(),
-
-        email:
-          document
-            .getElementById("studentEmail")
-            .value
-            .trim()
-
+        studentName,
+        studentClass,
+        schoolName,
+        studentPhone,
+        parentPhone,
+        studentEmail
       };
-
     }
 
 
-    function validateAdmission(data) {
-
-      const message =
-        document.getElementById(
-          "formMessage"
-        );
-
-
-      message.className =
-        "form-message";
-
-
-      if (!data.studentName) {
-
-        message.textContent =
-          "Please enter the student's name.";
-
-        message.className =
-          "form-message error";
-
-        return false;
-
-      }
-
-
-      if (!data.studentClass) {
-
-        message.textContent =
-          "Please select the student's class.";
-
-        message.className =
-          "form-message error";
-
-        return false;
-
-      }
-
-
-      if (!data.schoolName) {
-
-        message.textContent =
-          "Please enter the school name.";
-
-        message.className =
-          "form-message error";
-
-        return false;
-
-      }
-
-
-      if (
-        data.studentPhone &&
-        !/^\d{10}$/.test(data.studentPhone)
-      ) {
-
-        message.textContent =
-          "Student phone must contain exactly 10 digits.";
-
-        message.className =
-          "form-message error";
-
-        return false;
-
-      }
-
-
-      if (
-        !/^\d{10}$/.test(data.parentPhone)
-      ) {
-
-        message.textContent =
-          "Parent phone must contain exactly 10 digits.";
-
-        message.className =
-          "form-message error";
-
-        return false;
-
-      }
-
-
-      if (
-        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)
-      ) {
-
-        message.textContent =
-          "Please enter a valid email address.";
-
-        message.className =
-          "form-message error";
-
-        return false;
-
-      }
-
-
-      return true;
-
-    }
-
+    /* Send Admission */
 
     function sendAdmission(method) {
 
-      const data =
-        getAdmissionData();
+      const data = getAdmissionData();
 
-
-      if (!validateAdmission(data)) {
+      if (!data) {
         return;
       }
 
 
       const message =
-        [
-          "RISE TUITION HUB - ADMISSION REQUEST",
-          "",
-          "Student Name: " + data.studentName,
-          "Class: " + data.studentClass,
-          "School Name: " + data.schoolName,
-          "Student Phone: " +
-            (data.studentPhone || "Not provided"),
-          "Parent Phone: " + data.parentPhone,
-          "Email: " + data.email,
-          "",
-          "Sent Via: " +
-            (method === "whatsapp"
-              ? "WhatsApp"
-              : "Email")
-        ].join("\n");
+`Rise Tuition Hub Admission Enquiry
 
+Student Name: ${data.studentName}
+Class: ${data.studentClass}
+School Name: ${data.schoolName}
+Student Phone: ${data.studentPhone || "Not provided"}
+Parent Phone: ${data.parentPhone}
+Email: ${data.studentEmail}`;
 
-      /* ================= WHATSAPP ================= */
 
       if (method === "whatsapp") {
 
-        const whatsappNumber =
-          "918228143000";
+        const whatsappNumber = "918228143000";
 
-        const url =
+        const whatsappURL =
           "https://wa.me/" +
           whatsappNumber +
           "?text=" +
           encodeURIComponent(message);
 
-        window.open(
-          url,
-          "_blank"
-        );
-
-        return;
+        window.open(whatsappURL, "_blank");
 
       }
 
 
-      /* ================= EMAIL ================= */
+      else if (method === "email") {
 
-      if (method === "email") {
-
-        const emailTo =
+        const email =
           "rittu3308@gmail.com";
 
         const subject =
-          "New Admission Request - " +
-          data.studentName;
+          "New Admission Enquiry - Rise Tuition Hub";
 
-        const url =
+        const emailURL =
           "mailto:" +
-          emailTo +
+          email +
           "?subject=" +
           encodeURIComponent(subject) +
           "&body=" +
           encodeURIComponent(message);
 
-        window.location.href =
-          url;
+        window.location.href = emailURL;
 
       }
 
     }
 
   </script>
-
 
 </body>
 </html>
