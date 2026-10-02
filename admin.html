@@ -1,1 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Admin Panel - Rise Tuition Hub</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f7fb;
+    color: #1e293b;
+}
+
+/* SIDEBAR */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 240px;
+    height: 100vh;
+    background: #0b3d91;
+    color: white;
+    padding: 25px 15px;
+    overflow-y: auto;
+}
+
+.logo-area {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-area img {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+    border-radius: 15px;
+    background: white;
+}
+
+.logo-area h2 {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.menu button {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: white;
+    padding: 14px;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+.menu button:hover,
+.menu button.active {
+    background: #145dcc;
+}
+
+.logout {
+    margin-top: 25px !important;
+    background: #dc2626 !important;
+}
+
+/* MAIN */
+.main {
+    margin-left: 240px;
+    padding: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 28px;
+}
+
+.date {
+    color: #64748b;
+}
+
+/* SECTIONS */
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+/* CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+}
+
+.card h3 {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+.card .number {
+    font-size: 28px;
+    font-weight: bold;
+    color: #0b3d91;
+}
+
+/* TABLE */
+.table-box {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 20px;
+    overflow-x: auto;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+}
+
+.table-box h2 {
+    margin-bottom: 18px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+}
+
+th,
+td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    background: #f1f5f9;
+    color: #334155;
+}
+
+button.action {
+    border: none;
+    padding: 7px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 2px;
+    font-size: 12px;
+}
+
+.whatsapp {
+    background: #22c55e;
+    color: white;
+}
+
+.email {
+    background: #2563eb;
+    color: white;
+}
+
+.enroll {
+    background: #7c3aed;
+    color: white;
+}
+
+.reply {
+    background: #f59e0b;
+    color: white;
+}
+
+.edit {
+    background: #2563eb;
+    color: white;
+}
+
+.delete {
+    background: #dc2626;
+    color: white;
+}
+
+/* FORM */
+.form-box {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 11px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    outline: none;
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.save-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    background: #0b3d91;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* MOBILE */
+@media(max-width: 900px) {
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .main {
+        margin-left: 200px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 600px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div class="logo-area">
+        <img src="logo.png.png" alt="Logo">
+        <h2>Rise Tuition Hub</h2>
+    </div>
+
+    <div class="menu">
+
+        <button class="active" onclick="showSection('dashboard', this)">
+            Dashboard
+        </button>
+
+        <button onclick="showSection('admissions', this)">
+            Admissions
+        </button>
+
+        <button onclick="showSection('students', this)">
+            Students
+        </button>
+
+        <button onclick="showSection('fees', this)">
+            Fees
+        </button>
+
+        <button onclick="showSection('attendance', this)">
+            Attendance
+        </button>
+
+        <button onclick="showSection('performance', this)">
+            Performance
+        </button>
+
+        <button onclick="showSection('settings', this)">
+            Settings
+        </button>
+
+        <button class="logout" onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <div class="header">
+        <div>
+            <h1 id="pageTitle">Dashboard</h1>
+            <p class="date" id="todayDate"></p>
+        </div>
+    </div>
+
+
+    <!-- DASHBOARD -->
+
+    <section id="dashboard" class="section active">
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Today's Admissions</h3>
+                <div class="number" id="todayAdmissions">0</div>
+            </div>
+
+            <div class="card">
+                <h3>New Admissions</h3>
+                <div class="number" id="newAdmissions">0</div>
+            </div>
+
+            <div class="card">
+                <h3>Total Students</h3>
+                <div class="number" id="totalStudents">0</div>
+            </div>
+
+            <div class="card">
+                <h3>Paid Fees</h3>
+                <div class="number">₹0</div>
+            </div>
+
+            <div class="card">
+                <h3>Pending Fees</h3>
+                <div class="number">₹0</div>
+            </div>
+
+        </div>
+
+        <div class="table-box">
+
+            <h2>Welcome to Rise Tuition Hub Admin Panel</h2>
+
+            <p>
+                Use the menu on the left to manage admissions,
+                students, fees, attendance, performance and settings.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ADMISSIONS -->
+
+    <section id="admissions" class="section">
+
+        <div class="table-box">
+
+            <h2>Admissions</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Class</th>
+                        <th>School Name</th>
+                        <th>Student Phone</th>
+                        <th>Parent Phone</th>
+                        <th>Email</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Sent Via</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="admissionsTable">
+
+                    <tr>
+                        <td colspan="10">
+                            No admissions yet.
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- STUDENTS -->
+
+    <section id="students" class="section">
+
+        <div class="table-box">
+
+            <h2>Students</h2>
+
+            <button class="save-btn" onclick="addStudent()">
+                + Add Student
+            </button>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Class</th>
+                        <th>School</th>
+                        <th>Student Phone</th>
+                        <th>Parent Phone</th>
+                        <th>Email</th>
+                        <th>Fee Amount</th>
+                        <th>Fee Status</th>
+                        <th>Attendance</th>
+                        <th>Performance</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="studentsTable">
+
+                    <tr>
+                        <td colspan="11">
+                            No students added yet.
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEES -->
+
+    <section id="fees" class="section">
+
+        <div class="table-box">
+
+            <h2>Fees</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Fee Amount</th>
+                        <th>Paid</th>
+                        <th>Pending</th>
+                        <th>Month</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="feesTable">
+
+                    <tr>
+                        <td colspan="5">
+                            No fee records yet.
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- ATTENDANCE -->
+
+    <section id="attendance" class="section">
+
+        <div class="table-box">
+
+            <h2>Attendance</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Present</th>
+                        <th>Absent</th>
+                        <th>Attendance %</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td colspan="4">
+                            No attendance records yet.
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- PERFORMANCE -->
+
+    <section id="performance" class="section">
+
+        <div class="table-box">
+
+            <h2>Performance</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Performance</th>
+                        <th>Remarks</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td colspan="3">
+                            No performance records yet.
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+            <br>
+
+            <p>
+                Performance levels:
+                <b>Excellent</b> |
+                <b>Very Good</b> |
+                <b>Good</b> |
+                <b>Average</b> |
+                <b>Needs Improvement</b>
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SETTINGS -->
+
+    <section id="settings" class="section">
+
+        <div class="form-box">
+
+            <h2>Settings</h2>
+
+            <br>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>WhatsApp Number</label>
+
+                    <input
+                        type="text"
+                        value="8228143000"
+                        id="whatsappNumber"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Email Address</label>
+
+                    <input
+                        type="email"
+                        value="rittu3308@gmail.com"
+                        id="emailAddress"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Website Name</label>
+
+                    <input
+                        type="text"
+                        value="Rise Tuition Hub"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Website Details</label>
+
+                    <textarea>Rise Tuition Hub provides quality tuition and academic support for students.</textarea>
+
+                </div>
+
+            </div>
+
+            <button class="save-btn" onclick="saveSettings()">
+                Save Settings
+            </button>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+/* DATE */
+
+const date = new Date();
+
+document.getElementById("todayDate").innerText =
+    date.toLocaleDateString("en-IN", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    });
+
+
+/* PAGE SWITCHING */
+
+function showSection(sectionId, button) {
+
+    const sections =
+        document.querySelectorAll(".section");
+
+    sections.forEach(section => {
+        section.classList.remove("active");
+    });
+
+    document.getElementById(sectionId)
+        .classList.add("active");
+
+
+    const buttons =
+        document.querySelectorAll(".menu button");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+
+    const titles = {
+
+        dashboard: "Dashboard",
+        admissions: "Admissions",
+        students: "Students",
+        fees: "Fees",
+        attendance: "Attendance",
+        performance: "Performance",
+        settings: "Settings"
+
+    };
+
+    document.getElementById("pageTitle").innerText =
+        titles[sectionId];
+
+}
+
+
+/* ADD STUDENT */
+
+function addStudent() {
+
+    alert(
+        "Student database connection will be added next."
+    );
+
+}
+
+
+/* SAVE SETTINGS */
+
+function saveSettings() {
+
+    alert("Settings saved successfully.");
+
+}
+
+
+/* LOGOUT */
+
+function logout() {
+
+    const confirmLogout =
+        confirm("Are you sure you want to logout?");
+
+    if (confirmLogout) {
+
+        window.location.href = "login.html";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
