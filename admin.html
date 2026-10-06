@@ -21,6 +21,73 @@ body {
     color: #1e293b;
 }
 
+.hidden {
+    display: none !important;
+}
+
+.login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #0b3d91, #08265a);
+}
+
+.login-box {
+    width: 100%;
+    max-width: 420px;
+    background: #fff;
+    padding: 34px;
+    border-radius: 18px;
+    box-shadow: 0 25px 70px rgba(0,0,0,.25);
+}
+
+.login-box h1 {
+    color: #0b3d91;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.login-box p {
+    color: #64748b;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.login-box label {
+    display: block;
+    font-weight: 700;
+    margin: 12px 0 6px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+}
+
+.login-box button {
+    width: 100%;
+    margin-top: 18px;
+    padding: 13px;
+    border: 0;
+    border-radius: 8px;
+    background: #0b3d91;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.login-message {
+    min-height: 20px;
+    margin-top: 12px;
+    text-align: center;
+    color: #dc2626;
+    font-size: 14px;
+}
+
 /* SIDEBAR */
 .sidebar {
     position: fixed;
@@ -311,16 +378,32 @@ th {
 
 <body>
 
+<div id="loginScreen" class="login-screen">
+    <div class="login-box">
+        <h1>Rise Tuition Hub</h1>
+        <p>Admin Panel Login</p>
+        <form id="loginForm">
+            <label for="loginEmail">Admin Email</label>
+            <input id="loginEmail" type="email" autocomplete="username" required>
+
+            <label for="loginPassword">Password</label>
+            <input id="loginPassword" type="password" autocomplete="current-password" required>
+
+            <button type="submit">Login to Admin Panel</button>
+            <div id="loginMessage" class="login-message"></div>
+        </form>
+    </div>
+</div>
+
+<div id="adminApp" class="hidden">
+
 <!-- SIDEBAR -->
 
 <div class="sidebar">
 
     <div class="logo-area">
-
-        <img src="logo.png.png" alt="Rise Tuition Hub">
-
         <h2>Rise Tuition Hub</h2>
-
+        <div style="margin-top:6px;font-size:12px;opacity:.8;">Secure Admin Panel</div>
     </div>
 
     <div class="menu">
@@ -418,11 +501,23 @@ th {
 
         <div class="table-box">
 
-            <h2>Admissions</h2>
+            <h2>Website Admission Enquiries</h2>
+            <p style="margin-bottom:18px;color:#64748b;">New admission forms submitted on the public website appear here.</p>
 
-            <p>
-                Admissions management will be connected next.
-            </p>
+            <table style="min-width:900px;">
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Class</th>
+                        <th>School</th>
+                        <th>Student Phone</th>
+                        <th>Parent Phone</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="admissionsTable"></tbody>
+            </table>
 
         </div>
 
@@ -661,7 +756,7 @@ th {
 
                     <input id="whatsappNumber"
                            type="text"
-                           value="8228143000">
+                           value="8222814300">
 
                 </div>
 
@@ -689,6 +784,8 @@ th {
         </div>
 
     </section>
+
+</div>
 
 </div>
 
@@ -771,6 +868,10 @@ function showSection(sectionId, button) {
 
     if (sectionId === "students") {
         loadStudents();
+    }
+
+    if (sectionId === "admissions") {
+        loadAdmissions();
     }
 
 }
@@ -1271,10 +1372,92 @@ function escapeHTML(value) {
    LOGOUT
    ===================================================== */
 
-function logout() {
+async function logout() {
+    await supabaseClient.auth.signOut();
+    showLogin();
+}
 
-    window.location.href = "login.html";
 
+/* =====================================================
+   AUTHENTICATION
+   ===================================================== */
+
+function showLogin() {
+    document.getElementById("loginScreen").classList.remove("hidden");
+    document.getElementById("adminApp").classList.add("hidden");
+}
+
+function showAdmin() {
+    document.getElementById("loginScreen").classList.add("hidden");
+    document.getElementById("adminApp").classList.remove("hidden");
+    loadStudents();
+    loadAdmissions();
+}
+
+document.getElementById("loginForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const message = document.getElementById("loginMessage");
+    message.textContent = "Signing in...";
+
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+
+    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+    if (error) {
+        message.textContent = error.message;
+        return;
+    }
+
+    message.textContent = "";
+    showAdmin();
+});
+
+supabaseClient.auth.onAuthStateChange((event, session) => {
+    if (session) {
+        showAdmin();
+    } else {
+        showLogin();
+    }
+});
+
+async function loadAdmissions() {
+    const table = document.getElementById("admissionsTable");
+    if (!table) return;
+
+    table.innerHTML = '<tr><td colspan="7" class="loading">Loading enquiries...</td></tr>';
+
+    const { data, error } = await supabaseClient
+        .from("students")
+        .select("*")
+        .order("id", { ascending: false });
+
+    if (error) {
+        table.innerHTML = `<tr><td colspan="7">Could not load enquiries.</td></tr>`;
+        console.error(error);
+        return;
+    }
+
+    document.getElementById("newAdmissions").innerText = data.length;
+    document.getElementById("todayAdmissions").innerText = data.length;
+
+    if (!data.length) {
+        table.innerHTML = '<tr><td colspan="7">No website enquiries yet.</td></tr>';
+        return;
+    }
+
+    table.innerHTML = data.map(student => `
+        <tr>
+            <td>${escapeHTML(student.student_name)}</td>
+            <td>${escapeHTML(student.class)}</td>
+            <td>${escapeHTML(student.school)}</td>
+            <td>${escapeHTML(student.student_phone)}</td>
+            <td>${escapeHTML(student.parent_phone)}</td>
+            <td>${escapeHTML(student.email)}</td>
+            <td>${escapeHTML(student.performance || "Admission Enquiry")}</td>
+        </tr>
+    `).join("");
 }
 
 
@@ -1282,7 +1465,7 @@ function logout() {
    INITIAL LOAD
    ===================================================== */
 
-loadStudents();
+showLogin();
 
 </script>
 
