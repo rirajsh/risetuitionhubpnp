@@ -347,10 +347,20 @@ th {
 }
 
 /* MOBILE */
+
+.section-toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:15px}
+.subtext{color:#64748b;margin-top:5px;margin-bottom:12px}
+.search-input{padding:10px 12px;border:1px solid #cbd5e1;border-radius:7px;min-width:240px;outline:none}
+.mini-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:15px 0}
+.inline-input,.inline-select{width:100%;min-width:100px;padding:8px;border:1px solid #cbd5e1;border-radius:6px;background:white}
+.save-mini{border:0;background:#0b3d91;color:white;padding:8px 11px;border-radius:6px;cursor:pointer;font-weight:bold}
+.empty-state{text-align:center;padding:30px;color:#64748b}
+
 @media(max-width: 1000px) {
     .cards {
         grid-template-columns: repeat(2, 1fr);
     }
+    .mini-cards { grid-template-columns: 1fr; }
 }
 
 @media(max-width: 700px) {
@@ -607,7 +617,7 @@ th {
                     <div class="form-group">
                         <label>Attendance</label>
 
-                        <input id="attendance"
+                        <input id="attendanceValue"
                                type="text"
                                placeholder="Example: 95%">
                     </div>
@@ -615,7 +625,7 @@ th {
                     <div class="form-group">
                         <label>Performance</label>
 
-                        <select id="performance">
+                        <select id="performanceValue">
 
                             <option value="Excellent">
                                 Excellent
@@ -692,13 +702,21 @@ th {
     <section id="fees" class="section">
 
         <div class="table-box">
+            <div class="section-toolbar">
+                <div>
+                    <h2>Fees Management</h2>
+                    <p class="subtext">Manage fee amount and payment status for every student.</p>
+                </div>
+                <input id="feeSearch" class="search-input" type="search" placeholder="Search student..." oninput="renderFees()">
+            </div>
 
-            <h2>Fees</h2>
+            <div class="mini-cards">
+                <div class="card"><h3>Total Fee Amount</h3><div class="number" id="feeTotal">₹0</div></div>
+                <div class="card"><h3>Paid</h3><div class="number" id="feePaidTotal">₹0</div></div>
+                <div class="card"><h3>Pending / Partial</h3><div class="number" id="feePendingTotal">₹0</div></div>
+            </div>
 
-            <p>
-                Fees management will be connected next.
-            </p>
-
+            <div id="feesTableWrap"></div>
         </div>
 
     </section>
@@ -709,13 +727,14 @@ th {
     <section id="attendance" class="section">
 
         <div class="table-box">
-
-            <h2>Attendance</h2>
-
-            <p>
-                Attendance management will be connected next.
-            </p>
-
+            <div class="section-toolbar">
+                <div>
+                    <h2>Attendance Management</h2>
+                    <p class="subtext">Update attendance percentage for every student.</p>
+                </div>
+                <input id="attendanceSearch" class="search-input" type="search" placeholder="Search student..." oninput="renderAttendance()">
+            </div>
+            <div id="attendanceTableWrap"></div>
         </div>
 
     </section>
@@ -726,13 +745,14 @@ th {
     <section id="performance" class="section">
 
         <div class="table-box">
-
-            <h2>Performance</h2>
-
-            <p>
-                Performance management will be connected next.
-            </p>
-
+            <div class="section-toolbar">
+                <div>
+                    <h2>Performance Management</h2>
+                    <p class="subtext">Update academic performance for every student.</p>
+                </div>
+                <input id="performanceSearch" class="search-input" type="search" placeholder="Search student..." oninput="renderPerformance()">
+            </div>
+            <div id="performanceTableWrap"></div>
         </div>
 
     </section>
@@ -814,6 +834,7 @@ const supabaseClient =
    ===================================================== */
 
 let editingStudentId = null;
+let studentsData = [];
 
 
 /* =====================================================
@@ -924,8 +945,8 @@ function clearStudentForm() {
     document.getElementById("studentEmail").value = "";
     document.getElementById("feeAmount").value = "";
     document.getElementById("feeStatus").value = "Paid";
-    document.getElementById("attendance").value = "";
-    document.getElementById("performance").value = "Excellent";
+    document.getElementById("attendanceValue").value = "";
+    document.getElementById("performanceValue").value = "Excellent";
 
 }
 
@@ -963,10 +984,10 @@ async function saveStudent() {
             document.getElementById("feeStatus").value,
 
         attendance:
-            document.getElementById("attendance").value.trim(),
+            document.getElementById("attendanceValue").value.trim(),
 
         performance:
-            document.getElementById("performance").value
+            document.getElementById("performanceValue").value
 
     };
 
@@ -1279,10 +1300,10 @@ async function editStudent(id) {
     document.getElementById("feeStatus").value =
         data.fee_status || "Paid";
 
-    document.getElementById("attendance").value =
+    document.getElementById("attendanceValue").value =
         data.attendance || "";
 
-    document.getElementById("performance").value =
+    document.getElementById("performanceValue").value =
         data.performance || "Excellent";
 
 
@@ -1466,6 +1487,267 @@ async function loadAdmissions() {
    ===================================================== */
 
 showLogin();
+
+
+
+/* =====================================================
+   LIVE FEES / ATTENDANCE / PERFORMANCE MANAGEMENT
+   ===================================================== */
+
+function moneyValue(value) {
+    const n = Number(String(value ?? "").replace(/[₹,\s]/g, ""));
+    return Number.isFinite(n) ? n : 0;
+}
+
+function formatMoneyValue(value) {
+    return "₹" + moneyValue(value).toLocaleString("en-IN", { maximumFractionDigits: 2 });
+}
+
+function attendanceValueNumber(value) {
+    const n = Number(String(value ?? "").replace("%", "").trim());
+    return Number.isFinite(n) ? Math.max(0, Math.min(100, n)) : null;
+}
+
+function feeStatusClass(status) {
+    if (status === "Paid") return "status status-paid";
+    if (status === "Partially Paid") return "status status-pending";
+    return "status status-pending";
+}
+
+function filteredStudents(searchId) {
+    const q = (document.getElementById(searchId)?.value || "").toLowerCase().trim();
+    if (!q) return studentsData;
+    return studentsData.filter(s =>
+        String(s.student_name || "").toLowerCase().includes(q) ||
+        String(s.class || "").toLowerCase().includes(q) ||
+        String(s.school || "").toLowerCase().includes(q)
+    );
+}
+
+function renderFees() {
+    const list = filteredStudents("feeSearch");
+    const total = list.reduce((sum, s) => sum + moneyValue(s.fee_amount), 0);
+    const paid = list.filter(s => s.fee_status === "Paid").reduce((sum, s) => sum + moneyValue(s.fee_amount), 0);
+    const pending = Math.max(0, total - paid);
+
+    document.getElementById("feeTotal").innerText = formatMoneyValue(total);
+    document.getElementById("feePaidTotal").innerText = formatMoneyValue(paid);
+    document.getElementById("feePendingTotal").innerText = formatMoneyValue(pending);
+
+    const wrap = document.getElementById("feesTableWrap");
+    if (!list.length) {
+        wrap.innerHTML = '<div class="empty-state">No students found.</div>';
+        return;
+    }
+
+    wrap.innerHTML = `
+        <table>
+            <thead><tr>
+                <th>Student</th><th>Class</th><th>Fee Amount</th><th>Fee Status</th><th>Action</th>
+            </tr></thead>
+            <tbody>
+                ${list.map(s => `
+                    <tr>
+                        <td>${escapeHTML(s.student_name)}</td>
+                        <td>${escapeHTML(s.class)}</td>
+                        <td><input class="inline-input" id="feeAmount_${s.id}" type="number" min="0" step="0.01" value="${escapeHTML(s.fee_amount ?? "")}"></td>
+                        <td>
+                            <select class="inline-select" id="feeStatus_${s.id}">
+                                <option value="Paid" ${s.fee_status === "Paid" ? "selected" : ""}>Paid</option>
+                                <option value="Pending" ${s.fee_status === "Pending" ? "selected" : ""}>Pending</option>
+                                <option value="Partially Paid" ${s.fee_status === "Partially Paid" ? "selected" : ""}>Partially Paid</option>
+                            </select>
+                        </td>
+                        <td><button class="save-mini" onclick="saveFee(${Number(s.id)})">Save</button></td>
+                    </tr>
+                `).join("")}
+            </tbody>
+        </table>`;
+}
+
+async function saveFee(id) {
+    const amount = document.getElementById("feeAmount_" + id).value.trim();
+    const status = document.getElementById("feeStatus_" + id).value;
+    const { error } = await supabaseClient.from("students").update({
+        fee_amount: amount,
+        fee_status: status
+    }).eq("id", id);
+
+    if (error) {
+        alert("Could not update fee:\n\n" + error.message);
+        return;
+    }
+    const row = studentsData.find(s => Number(s.id) === Number(id));
+    if (row) { row.fee_amount = amount; row.fee_status = status; }
+    updateDashboardCards();
+    renderFees();
+    alert("Fee information updated successfully.");
+}
+
+function renderAttendance() {
+    const list = filteredStudents("attendanceSearch");
+    const wrap = document.getElementById("attendanceTableWrap");
+    if (!list.length) {
+        wrap.innerHTML = '<div class="empty-state">No students found.</div>';
+        return;
+    }
+    wrap.innerHTML = `
+        <table>
+            <thead><tr>
+                <th>Student</th><th>Class</th><th>School</th><th>Current Attendance</th><th>New Attendance (%)</th><th>Action</th>
+            </tr></thead>
+            <tbody>
+                ${list.map(s => `
+                    <tr>
+                        <td>${escapeHTML(s.student_name)}</td>
+                        <td>${escapeHTML(s.class)}</td>
+                        <td>${escapeHTML(s.school)}</td>
+                        <td>${s.attendance === null || s.attendance === "" || s.attendance === undefined ? "—" : escapeHTML(s.attendance) + "%"}</td>
+                        <td><input class="inline-input" id="attendance_${s.id}" type="number" min="0" max="100" step="0.01" value="${escapeHTML(s.attendance ?? "")}" placeholder="0–100"></td>
+                        <td><button class="save-mini" onclick="saveAttendance(${Number(s.id)})">Save</button></td>
+                    </tr>
+                `).join("")}
+            </tbody>
+        </table>`;
+}
+
+async function saveAttendance(id) {
+    const value = document.getElementById("attendance_" + id).value.trim();
+    if (value !== "" && (Number(value) < 0 || Number(value) > 100)) {
+        alert("Attendance must be between 0 and 100.");
+        return;
+    }
+    const { error } = await supabaseClient.from("students").update({ attendance: value }).eq("id", id);
+    if (error) {
+        alert("Could not update attendance:\n\n" + error.message);
+        return;
+    }
+    const row = studentsData.find(s => Number(s.id) === Number(id));
+    if (row) row.attendance = value;
+    updateDashboardCards();
+    renderAttendance();
+    alert("Attendance updated successfully.");
+}
+
+function renderPerformance() {
+    const list = filteredStudents("performanceSearch");
+    const wrap = document.getElementById("performanceTableWrap");
+    const options = ["Excellent", "Very Good", "Good", "Average", "Needs Improvement"];
+    if (!list.length) {
+        wrap.innerHTML = '<div class="empty-state">No students found.</div>';
+        return;
+    }
+    wrap.innerHTML = `
+        <table>
+            <thead><tr>
+                <th>Student</th><th>Class</th><th>School</th><th>Current Performance</th><th>New Performance</th><th>Action</th>
+            </tr></thead>
+            <tbody>
+                ${list.map(s => `
+                    <tr>
+                        <td>${escapeHTML(s.student_name)}</td>
+                        <td>${escapeHTML(s.class)}</td>
+                        <td>${escapeHTML(s.school)}</td>
+                        <td>${escapeHTML(s.performance || "—")}</td>
+                        <td>
+                            <select class="inline-select" id="performance_${s.id}">
+                                ${options.map(o => `<option value="${escapeHTML(o)}" ${s.performance === o ? "selected" : ""}>${escapeHTML(o)}</option>`).join("")}
+                            </select>
+                        </td>
+                        <td><button class="save-mini" onclick="savePerformance(${Number(s.id)})">Save</button></td>
+                    </tr>
+                `).join("")}
+            </tbody>
+        </table>`;
+}
+
+async function savePerformance(id) {
+    const value = document.getElementById("performance_" + id).value;
+    const { error } = await supabaseClient.from("students").update({ performance: value }).eq("id", id);
+    if (error) {
+        alert("Could not update performance:\n\n" + error.message);
+        return;
+    }
+    const row = studentsData.find(s => Number(s.id) === Number(id));
+    if (row) row.performance = value;
+    renderPerformance();
+    alert("Performance updated successfully.");
+}
+
+function updateDashboardCards() {
+    document.getElementById("totalStudents").innerText = studentsData.length;
+    const totalFees = studentsData.reduce((sum, s) => sum + moneyValue(s.fee_amount), 0);
+    const paidFees = studentsData.filter(s => s.fee_status === "Paid").reduce((sum, s) => sum + moneyValue(s.fee_amount), 0);
+    const pendingFees = Math.max(0, totalFees - paidFees);
+    document.getElementById("paidFees").innerText = formatMoneyValue(paidFees);
+    document.getElementById("pendingFees").innerText = formatMoneyValue(pendingFees);
+
+    const attendance = studentsData.map(s => attendanceValueNumber(s.attendance)).filter(v => v !== null);
+    const avg = attendance.length ? attendance.reduce((a,b) => a+b, 0) / attendance.length : 0;
+    const avgElement = document.getElementById("averageAttendance");
+    if (avgElement) avgElement.innerText = avg.toFixed(1) + "%";
+}
+
+/* Replace the original student loader so all management sections share one live data set. */
+async function loadStudents() {
+    const table = document.getElementById("studentsTable");
+    const wrap = document.getElementById("studentsTableWrap");
+    if (wrap) wrap.innerHTML = '<div class="loading">Loading students...</div>';
+    if (table) table.innerHTML = '<tr><td colspan="11" class="loading">Loading students...</td></tr>';
+
+    const { data, error } = await supabaseClient
+        .from("students")
+        .select("*")
+        .order("id", { ascending: false });
+
+    if (error) {
+        const message = "Could not load students:\n\n" + error.message;
+        if (wrap) wrap.innerHTML = '<div class="danger-note">' + escapeHTML(message) + '</div>';
+        if (table) table.innerHTML = '<tr><td colspan="11">Could not load students.</td></tr>';
+        console.error(error);
+        return;
+    }
+
+    studentsData = data || [];
+
+    if (table) {
+        if (!studentsData.length) {
+            table.innerHTML = '<tr><td colspan="11" class="empty-state">No students added yet.</td></tr>';
+        } else {
+            table.innerHTML = studentsData.map(s => `
+                <tr>
+                    <td>${escapeHTML(s.student_name)}</td>
+                    <td>${escapeHTML(s.class)}</td>
+                    <td>${escapeHTML(s.school)}</td>
+                    <td>${escapeHTML(s.student_phone)}</td>
+                    <td>${escapeHTML(s.parent_phone)}</td>
+                    <td>${escapeHTML(s.email)}</td>
+                    <td>${formatMoneyValue(s.fee_amount)}</td>
+                    <td><span class="${feeStatusClass(s.fee_status)}">${escapeHTML(s.fee_status || "Pending")}</span></td>
+                    <td>${s.attendance === null || s.attendance === "" || s.attendance === undefined ? "—" : escapeHTML(s.attendance) + "%"}</td>
+                    <td>${escapeHTML(s.performance || "—")}</td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="editStudent(${Number(s.id)})">Edit</button>
+                        <button class="action-btn delete-btn" onclick="deleteStudent(${Number(s.id)})">Delete</button>
+                    </td>
+                </tr>`).join("");
+        }
+    }
+
+    updateDashboardCards();
+    renderFees();
+    renderAttendance();
+    renderPerformance();
+}
+
+/* Keep the existing navigation but make management sections refresh immediately. */
+const originalShowSection = showSection;
+showSection = function(sectionId, button) {
+    originalShowSection(sectionId, button);
+    if (sectionId === "fees") renderFees();
+    if (sectionId === "attendance") renderAttendance();
+    if (sectionId === "performance") renderPerformance();
+};
 
 </script>
 
