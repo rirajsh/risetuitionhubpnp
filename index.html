@@ -67,13 +67,6 @@
       gap: 12px;
     }
 
-    .logo {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-      border-radius: 12px;
-    }
-
     .brand {
       font-size: 21px;
       font-weight: 800;
@@ -842,11 +835,6 @@
         font-size: 17px;
       }
 
-      .logo {
-        width: 42px;
-        height: 42px;
-      }
-
       .hero h1 {
         font-size: 37px;
       }
@@ -872,7 +860,6 @@
     <div class="nav-container">
 
       <a href="#home" class="logo-area">
-        <img src="logo.png.png" alt="Rise Tuition Hub Logo" class="logo">
         <span class="brand">Rise Tuition Hub</span>
       </a>
 
@@ -1509,10 +1496,10 @@
           <h3>WhatsApp</h3>
 
           <a
-            href="https://wa.me/918228143000"
+            href="https://wa.me/918222814300"
             target="_blank"
           >
-            +91 82281 43000
+            +91 8222814300
           </a>
 
         </div>
@@ -1593,7 +1580,7 @@
 
         <h3>Contact</h3>
 
-        <a href="https://wa.me/918228143000" target="_blank">
+        <a href="https://wa.me/918222814300" target="_blank">
           WhatsApp
         </a>
 
@@ -1623,7 +1610,13 @@
        JAVASCRIPT
   ========================== -->
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script>
+
+    const SUPABASE_URL = "https://iqqcoiflmpjwztwgualf.supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_kak3WxVKdtsiDjo-bVvrXA_ITdmPDWr";
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
     /* Mobile Menu */
 
@@ -1736,7 +1729,7 @@
 
     /* Send Admission */
 
-    function sendAdmission(method) {
+    async function sendAdmission(method) {
 
       const data = getAdmissionData();
 
@@ -1755,10 +1748,31 @@ Student Phone: ${data.studentPhone || "Not provided"}
 Parent Phone: ${data.parentPhone}
 Email: ${data.studentEmail}`;
 
+      // Save the enquiry to the same Supabase project used by the Admin Panel.
+      // The admin can then see website enquiries in Students / Admissions.
+      const { error: saveError } = await supabaseClient
+        .from("students")
+        .insert([{
+          student_name: data.studentName,
+          class: data.studentClass,
+          school: data.schoolName,
+          student_phone: data.studentPhone,
+          parent_phone: data.parentPhone,
+          email: data.studentEmail,
+          fee_amount: "",
+          fee_status: "Pending",
+          attendance: "",
+          performance: "Admission Enquiry"
+        }]);
+
+      if (saveError) {
+        console.error("Supabase admission save error:", saveError);
+        // Keep WhatsApp/email working even if the database policy is not yet configured.
+      }
 
       if (method === "whatsapp") {
 
-        const whatsappNumber = "918228143000";
+        const whatsappNumber = "918222814300";
 
         const whatsappURL =
           "https://wa.me/" +
